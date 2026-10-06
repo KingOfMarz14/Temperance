@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bb1ny5h4o24gf"]
+
+[ext_resource type="Script" uid="uid://cwx6v0cox3n64" path="res://scenes/options_menu/options_menu.gd" id="1_yv8em"]
+[ext_resource type="Script" uid="uid://dacldvpcy4t0q" path="res://scenes/start_menu/back_button.gd" id="2_44mp6"]
+
+[node name="Options Menu" type="Node2D" unique_id=1067580395]
+script = ExtResource("1_yv8em")
+
+[node name="Button Manager" type="Control" parent="." unique_id=97155558]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Back Button" type="Button" parent="Button Manager" unique_id=2094659555]
+layout_mode = 0
+offset_right = 183.0
+offset_bottom = 132.0
+text = "Back button, returns 
+to main menu"
+script = ExtResource("2_44mp6")
+
+[connection signal="pressed" from="Button Manager/Back Button" to="." method="_on_back_button_pressed"]

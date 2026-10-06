@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://b1ugug67gkc7p"]
+
+[ext_resource type="Script" uid="uid://capv5wgfl88ff" path="res://scenes/game.gd" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://p4pnimwyctgj" path="res://scenes/drink_class.gd" id="2_lnu2h"]
+
+[node name="Game" type="Node2D" unique_id=357713896]
+script = ExtResource("1_yqjtg")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=93073527]
+position = Vector2(577, 325)
+
+[node name="Drink Class" type="Sprite2D" parent="." unique_id=912055357]
+script = ExtResource("2_lnu2h")
+
+[node name="Ingredients" type="Control" parent="." unique_id=2048599419]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="spirit_1" type="Button" parent="Ingredients" unique_id=986877432]
+layout_mode = 0
+offset_left = 67.0
+offset_top = 70.0
+offset_right = 227.0
+offset_bottom = 169.0
+text = "Spirit 1"
+
+[node name="mix-in_1" type="Button" parent="Ingredients" unique_id=1762562314]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 67.0
+offset_right = 644.0
+offset_bottom = 166.0
+text = "Mix-in 1"
+
+[node name="garnish_1" type="Button" parent="Ingredients" unique_id=19894844]
+layout_mode = 0
+offset_left = 888.0
+offset_top = 67.0
+offset_right = 1048.0
+offset_bottom = 166.0
+text = "Garnish 1"
+
+[connection signal="pressed" from="Ingredients/spirit_1" to="." method="_on_spirit_1_pressed"]
+[connection signal="pressed" from="Ingredients/mix-in_1" to="." method="_on_mixin_1_pressed"]
+[connection signal="pressed" from="Ingredients/garnish_1" to="." method="_on_garnish_1_pressed"]
