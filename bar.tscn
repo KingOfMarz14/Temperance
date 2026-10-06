@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://c7fwmq2dwy4mb"]
+
+[ext_resource type="Script" uid="uid://degefku1e4k7j" path="res://scenes/bar.gd" id="1_qyha7"]
+
+[node name="Bar" type="Node2D" unique_id=1433516175]
+script = ExtResource("1_qyha7")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=12702087]
+
+[node name="LibraryScreen" type="Node2D" parent="." unique_id=67347394]
+
+[node name="CustomerLayer" type="Node2D" parent="LibraryScreen" unique_id=1846962006]
+position = Vector2(576, 0)
+
+[node name="Background" type="ColorRect" parent="LibraryScreen/CustomerLayer" unique_id=725718520]
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 648.0
+color = Color(0.6096098, 0.5166635, 0.9634841, 1)
+
+[node name="Spot1" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=2013352281]
+position = Vector2(-432, 350)
+
+[node name="Spot2" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=1328450531]
+position = Vector2(-144, 350)
+
+[node name="Spot3" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=1725632394]
+position = Vector2(144, 350)
+
+[node name="Spot4" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=611019373]
+position = Vector2(432, 350)
+
+[node name="CounterLayer" type="Node2D" parent="LibraryScreen" unique_id=52547281]
+position = Vector2(0, 500)
+
+[node name="Counter" type="ColorRect" parent="LibraryScreen/CounterLayer" unique_id=528811322]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.7186083, 0.59331846, 0.9240934, 1)
+
+[node name="ToolkitScreen" type="Node2D" parent="." unique_id=420253463]
+position = Vector2(1152, 0)
+
+[node name="CustomerLayer" type="Node2D" parent="ToolkitScreen" unique_id=1470800767]
+position = Vector2(576, 0)
+
+[node name="Background" type="ColorRect" parent="ToolkitScreen/CustomerLayer" unique_id=291563207]
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 648.0
+color = Color(0.6652961, 0.3802457, 0.3906972, 1)
+
+[node name="Spot5" type="Marker2D" parent="ToolkitScreen/CustomerLayer" unique_id=372100926]
+position = Vector2(-432, 350)
+
+[node name="Spot6" type="Marker2D" parent="ToolkitScreen/CustomerLayer" unique_id=1252495714]
+position = Vector2(-144, 350)
+
+[node name="Spot7" type="Marker2D" parent="ToolkitScreen/CustomerLayer" unique_id=1025629739]
+position = Vector2(144, 350)
+
+[node name="Spot8" type="Marker2D" parent="ToolkitScreen/CustomerLayer" unique_id=1069086600]
+position = Vector2(432, 350)
+
+[node name="CounterLayer" type="Node2D" parent="ToolkitScreen" unique_id=513142975]
+position = Vector2(0, 500)
+
+[node name="Counter" type="ColorRect" parent="ToolkitScreen/CounterLayer" unique_id=647544666]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.86642814, 0.59456724, 0.61878717, 1)
