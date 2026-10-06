@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://bcp2w71uw57yc"]
+
+[ext_resource type="Texture2D" uid="uid://bxa8ovkvr54vm" path="res://sprites/mothmanHappy0.png" id="1_eas7q"]
+[ext_resource type="Texture2D" uid="uid://bef2erwghkfk2" path="res://sprites/mothmanHappy1.png" id="2_0rcyg"]
+[ext_resource type="Texture2D" uid="uid://ca58cx51pcdj3" path="res://sprites/mothmanMad0.png" id="3_frhio"]
+[ext_resource type="Texture2D" uid="uid://clapnml8w4kqt" path="res://sprites/mothmanMad1.png" id="4_551dw"]
+[ext_resource type="Texture2D" uid="uid://cjmjc6xefylb7" path="res://sprites/mothmanNeutral0.png" id="5_sll7s"]
+[ext_resource type="Texture2D" uid="uid://dlnebddd1k6sx" path="res://sprites/mothmanNeutral1.png" id="6_crw8f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_78bur"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_eas7q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0rcyg")
+}],
+"loop": 1,
+"name": &"happy",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_frhio")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_551dw")
+}],
+"loop": 1,
+"name": &"mad",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_sll7s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_crw8f")
+}],
+"loop": 1,
+"name": &"neutral",
+"speed": 2.0
+}]
+
+[node name="Customer" type="Node2D" unique_id=777165008]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1440970712]
+visible = false
+sprite_frames = SubResource("SpriteFrames_78bur")
+animation = &"neutral"
+frame_progress = 0.94779956
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2130547759]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_sll7s")
+
+[node name="Bubble" type="Label" parent="." unique_id=731272046]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=371233393]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=505760537]
+
+[node name="Timer" type="Timer" parent="." unique_id=1531487063]
