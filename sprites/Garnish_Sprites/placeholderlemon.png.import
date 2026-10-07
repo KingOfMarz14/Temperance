@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brxmqle2ishk1"
-path="res://.godot/imported/placeholder lemon juice.png-520e9064e05b31023c0ae57c1a754b1f.ctex"
+uid="uid://dvioppg34ydfa"
+path="res://.godot/imported/placeholderlemon.png-34f7a8573fd2cb2ab5fa5713bf25f475.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholder lemon juice.png"
-dest_files=["res://.godot/imported/placeholder lemon juice.png-520e9064e05b31023c0ae57c1a754b1f.ctex"]
+source_file="res://sprites/Garnish_Sprites/placeholderlemon.png"
+dest_files=["res://.godot/imported/placeholderlemon.png-34f7a8573fd2cb2ab5fa5713bf25f475.ctex"]
 
 [params]
 

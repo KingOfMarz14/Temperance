@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjmjc6xefylb7"
-path="res://.godot/imported/mothmanNeutral0.png-6fd3404eb13b317469fd4e222f10785a.ctex"
+uid="uid://cgqa11otx18qh"
+path="res://.godot/imported/placeholder gin.png-4dc1e9e496817372716088eccd0152ad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mothmanNeutral0.png"
-dest_files=["res://.godot/imported/mothmanNeutral0.png-6fd3404eb13b317469fd4e222f10785a.ctex"]
+source_file="res://sprites/Spirit_Sprites/placeholder gin.png"
+dest_files=["res://.godot/imported/placeholder gin.png-4dc1e9e496817372716088eccd0152ad.ctex"]
 
 [params]
 

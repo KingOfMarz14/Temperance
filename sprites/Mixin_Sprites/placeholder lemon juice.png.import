@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b25ma6k5ty05k"
-path="res://.godot/imported/placeholdermargarita.png-e5c5a26cc224e6f1a7b257f7cd611eb5.ctex"
+uid="uid://brxmqle2ishk1"
+path="res://.godot/imported/placeholder lemon juice.png-524ada1e8ab4f2cb3f5a3a4df1e22e79.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholdermargarita.png"
-dest_files=["res://.godot/imported/placeholdermargarita.png-e5c5a26cc224e6f1a7b257f7cd611eb5.ctex"]
+source_file="res://sprites/Mixin_Sprites/placeholder lemon juice.png"
+dest_files=["res://.godot/imported/placeholder lemon juice.png-524ada1e8ab4f2cb3f5a3a4df1e22e79.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvioppg34ydfa"
-path="res://.godot/imported/placeholderlemon.png-161ef983ddca9840e60c16fb896585bc.ctex"
+uid="uid://b50isvgow4lnp"
+path="res://.godot/imported/placeholderHappy0.png-5fab0f2dbe09bf9d5309e5d466ffb780.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholderlemon.png"
-dest_files=["res://.godot/imported/placeholderlemon.png-161ef983ddca9840e60c16fb896585bc.ctex"]
+source_file="res://sprites/Character_Sprites/placeholderHappy0.png"
+dest_files=["res://.godot/imported/placeholderHappy0.png-5fab0f2dbe09bf9d5309e5d466ffb780.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwxw67ehmowxx"
-path="res://.godot/imported/placeholdercocktail.png-c820a40f4c6626ea04c4892726adc70a.ctex"
+uid="uid://dy8t8aonj3ffx"
+path="res://.godot/imported/placeholderHappy1.png-30245d868c2f0e1f0ac46bfd215a8e80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholdercocktail.png"
-dest_files=["res://.godot/imported/placeholdercocktail.png-c820a40f4c6626ea04c4892726adc70a.ctex"]
+source_file="res://sprites/Character_Sprites/placeholderHappy1.png"
+dest_files=["res://.godot/imported/placeholderHappy1.png-30245d868c2f0e1f0ac46bfd215a8e80.ctex"]
 
 [params]
 
