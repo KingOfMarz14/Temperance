@@ -12,6 +12,7 @@ const LOOK_TIME = 0.3               # Seconds the effect takes
 
 var screen_index := 0       # 0 = The Library, 1 = The Toolkit
 var looking_down := false
+var drink = Drink.new()
 
 @onready var camera: Camera2D = $Camera2D
 @onready var screens = [$LibraryScreen, $ToolkitScreen]
@@ -22,6 +23,9 @@ func _ready():
 	camera.anchor_mode = Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT
 	camera.position = Vector2.ZERO
 	_apply_look(false)  # Set the starting look instantly, no animation
+	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
+	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
+	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
 
 
 func _unhandled_input(event):
@@ -65,3 +69,29 @@ func _apply_look(animate: bool):
 			customers.scale = customer_scale
 			customers.modulate.a = customer_alpha
 			counter.position.y = counter_y
+
+func _on_spirit_menu_pressed() -> void:
+	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.show()
+	
+
+func _on_mixin_menu_pressed() -> void:
+	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".show()
+
+
+func _on_garnish_menu_pressed() -> void:
+	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.show()
+
+
+func _on_spirits_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+	drink.spirit = $LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.get_item_text(index)
+	print(drink.spirit)
+	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
+
+
+func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+	drink.mix = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
+	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
+
+
+func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+	pass # Replace with function body.

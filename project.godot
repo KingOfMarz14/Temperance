@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Temperance"
-run/main_scene="uid://c7fwmq2dwy4mb"
+run/main_scene="uid://6x7yauuha0t7"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
