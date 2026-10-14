@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxolfmsim8m18"
-path="res://.godot/imported/placeholderNeutral0.png-24c1e94898931f8c00763b6b85e1e97a.ctex"
+uid="uid://b25ma6k5ty05k"
+path="res://.godot/imported/placeholdermargarita.png-8a16f2e233df92ddfbae435725ea43a6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholderNeutral0.png"
-dest_files=["res://.godot/imported/placeholderNeutral0.png-24c1e94898931f8c00763b6b85e1e97a.ctex"]
+source_file="res://sprites/Glass_Sprites/placeholdermargarita.png"
+dest_files=["res://.godot/imported/placeholdermargarita.png-8a16f2e233df92ddfbae435725ea43a6.ctex"]
 
 [params]
 

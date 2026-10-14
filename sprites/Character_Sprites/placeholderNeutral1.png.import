@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlnebddd1k6sx"
-path="res://.godot/imported/mothmanNeutral1.png-95b161fd87a8d53a8c4b958c5468c4d6.ctex"
+uid="uid://v32kq6c8f317"
+path="res://.godot/imported/placeholderNeutral1.png-8f2aa0e00d87e00b17b766c2e4363d68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mothmanNeutral1.png"
-dest_files=["res://.godot/imported/mothmanNeutral1.png-95b161fd87a8d53a8c4b958c5468c4d6.ctex"]
+source_file="res://sprites/Character_Sprites/placeholderNeutral1.png"
+dest_files=["res://.godot/imported/placeholderNeutral1.png-8f2aa0e00d87e00b17b766c2e4363d68.ctex"]
 
 [params]
 

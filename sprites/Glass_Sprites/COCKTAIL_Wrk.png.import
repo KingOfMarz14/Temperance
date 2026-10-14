@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clapnml8w4kqt"
-path="res://.godot/imported/mothmanMad1.png-ae29cbc37f71c04d45f97f6b684e30ca.ctex"
+uid="uid://dxeg44k5wpvow"
+path="res://.godot/imported/COCKTAIL_Wrk.png-214a18aff511f475ca079188df2fd07d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mothmanMad1.png"
-dest_files=["res://.godot/imported/mothmanMad1.png-ae29cbc37f71c04d45f97f6b684e30ca.ctex"]
+source_file="res://sprites/Glass_Sprites/COCKTAIL_Wrk.png"
+dest_files=["res://.godot/imported/COCKTAIL_Wrk.png-214a18aff511f475ca079188df2fd07d.ctex"]
 
 [params]
 

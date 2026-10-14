@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwxw67ehmowxx"
-path="res://.godot/imported/placeholdercocktail.png-c820a40f4c6626ea04c4892726adc70a.ctex"
+uid="uid://bo52qpg06ylft"
+path="res://.godot/imported/CHERRY_Wrk.png-5c214038b8b5a6568b51614665697e98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholdercocktail.png"
-dest_files=["res://.godot/imported/placeholdercocktail.png-c820a40f4c6626ea04c4892726adc70a.ctex"]
+source_file="res://sprites/Garnish_Sprites/CHERRY_Wrk.png"
+dest_files=["res://.godot/imported/CHERRY_Wrk.png-5c214038b8b5a6568b51614665697e98.ctex"]
 
 [params]
 

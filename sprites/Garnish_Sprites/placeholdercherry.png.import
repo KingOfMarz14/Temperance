@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca58cx51pcdj3"
-path="res://.godot/imported/mothmanMad0.png-312f4743ed7945c478351846a976101d.ctex"
+uid="uid://cvafofrixuia1"
+path="res://.godot/imported/placeholdercherry.png-e0ce07ed17a6fc7033d0633b0e1232e3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mothmanMad0.png"
-dest_files=["res://.godot/imported/mothmanMad0.png-312f4743ed7945c478351846a976101d.ctex"]
+source_file="res://sprites/Garnish_Sprites/placeholdercherry.png"
+dest_files=["res://.godot/imported/placeholdercherry.png-e0ce07ed17a6fc7033d0633b0e1232e3.ctex"]
 
 [params]
 

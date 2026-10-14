@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt0mqnaklkv7r"
-path="res://.godot/imported/placeholderMad1.png-5b0f8bdaefb6088717b67f3f7000459d.ctex"
+uid="uid://c7qpwb832v5ij"
+path="res://.godot/imported/LIQUERGLASS_Wrk.png-8843e31c7fe23f7b7a91f3442ee8ea10.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholderMad1.png"
-dest_files=["res://.godot/imported/placeholderMad1.png-5b0f8bdaefb6088717b67f3f7000459d.ctex"]
+source_file="res://sprites/Glass_Sprites/LIQUERGLASS_Wrk.png"
+dest_files=["res://.godot/imported/LIQUERGLASS_Wrk.png-8843e31c7fe23f7b7a91f3442ee8ea10.ctex"]
 
 [params]
 

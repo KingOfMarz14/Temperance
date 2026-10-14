@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bef2erwghkfk2"
-path="res://.godot/imported/mothmanHappy1.png-3a6139299717f0e29601c26fd52e5bd1.ctex"
+uid="uid://dwxw67ehmowxx"
+path="res://.godot/imported/placeholdercocktail.png-3b7f48a76e53dfde4fcb8dd0e941f3f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mothmanHappy1.png"
-dest_files=["res://.godot/imported/mothmanHappy1.png-3a6139299717f0e29601c26fd52e5bd1.ctex"]
+source_file="res://sprites/Glass_Sprites/placeholdercocktail.png"
+dest_files=["res://.godot/imported/placeholdercocktail.png-3b7f48a76e53dfde4fcb8dd0e941f3f2.ctex"]
 
 [params]
 

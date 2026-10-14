@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b25ma6k5ty05k"
-path="res://.godot/imported/placeholdermargarita.png-e5c5a26cc224e6f1a7b257f7cd611eb5.ctex"
+uid="uid://cpce57cj0o6mb"
+path="res://.godot/imported/GRENADINE_Wrk.png-3a988dfbaee892246c38ddcde0f6146e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholdermargarita.png"
-dest_files=["res://.godot/imported/placeholdermargarita.png-e5c5a26cc224e6f1a7b257f7cd611eb5.ctex"]
+source_file="res://sprites/Mixin_Sprites/GRENADINE_Wrk.png"
+dest_files=["res://.godot/imported/GRENADINE_Wrk.png-3a988dfbaee892246c38ddcde0f6146e.ctex"]
 
 [params]
 

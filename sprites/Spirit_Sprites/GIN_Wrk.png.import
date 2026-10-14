@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgqa11otx18qh"
-path="res://.godot/imported/placeholder gin.png-5b165f50a0edf4b02b9f0dd760cacc31.ctex"
+uid="uid://b26d1n754xoa3"
+path="res://.godot/imported/GIN_Wrk.png-6a7c28006c82beb025664e2b7a5def08.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/placeholder gin.png"
-dest_files=["res://.godot/imported/placeholder gin.png-5b165f50a0edf4b02b9f0dd760cacc31.ctex"]
+source_file="res://sprites/Spirit_Sprites/GIN_Wrk.png"
+dest_files=["res://.godot/imported/GIN_Wrk.png-6a7c28006c82beb025664e2b7a5def08.ctex"]
 
 [params]
 

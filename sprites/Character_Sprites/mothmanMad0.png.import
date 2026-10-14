@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxa8ovkvr54vm"
-path="res://.godot/imported/mothmanHappy0.png-09d89f3873dc679f6d418bee8067d2ce.ctex"
+uid="uid://ca58cx51pcdj3"
+path="res://.godot/imported/mothmanMad0.png-0eb7e5ae571ba01c3e193d2bccf3fcc3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/mothmanHappy0.png"
-dest_files=["res://.godot/imported/mothmanHappy0.png-09d89f3873dc679f6d418bee8067d2ce.ctex"]
+source_file="res://sprites/Character_Sprites/mothmanMad0.png"
+dest_files=["res://.godot/imported/mothmanMad0.png-0eb7e5ae571ba01c3e193d2bccf3fcc3.ctex"]
 
 [params]
 
