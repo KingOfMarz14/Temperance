@@ -1,7 +1,14 @@
+<<<<<<< Updated upstream
 [gd_scene format=3 uid="uid://b1ugug67gkc7p"]
 
 [ext_resource type="Script" uid="uid://capv5wgfl88ff" path="res://scenes/game.gd" id="1_yqjtg"]
 [ext_resource type="Script" uid="uid://p4pnimwyctgj" path="res://scenes/drink_class.gd" id="2_lnu2h"]
+=======
+[gd_scene format=3 uid="uid://bc7k7uvdu56fg"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_yqjtg"]
+[ext_resource type="Script" path="res://scenes/drink_class.gd" id="2_lnu2h"]
+>>>>>>> Stashed changes
 
 [node name="Game" type="Node2D" unique_id=357713896]
 script = ExtResource("1_yqjtg")

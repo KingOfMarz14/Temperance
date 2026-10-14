@@ -1,6 +1,12 @@
+<<<<<<< Updated upstream
 [gd_scene format=3 uid="uid://6x7yauuha0t7"]
 
 [ext_resource type="Script" uid="uid://b3a88um45xeqe" path="res://scenes/title_screen/title_screen.gd" id="1_fgkus"]
+=======
+[gd_scene format=3 uid="uid://bkcimosei4034"]
+
+[ext_resource type="Script" path="res://scenes/title_screen/title_screen.gd" id="1_fgkus"]
+>>>>>>> Stashed changes
 
 [node name="Title Screen" type="Node2D" unique_id=569771428]
 script = ExtResource("1_fgkus")

@@ -1,8 +1,16 @@
+<<<<<<< Updated upstream
 [gd_scene format=3 uid="uid://gnmu7v4xipal"]
 
 [ext_resource type="Script" uid="uid://co1fsahuygdrw" path="res://scenes/start_menu/start_menu.gd" id="1_thu50"]
 [ext_resource type="Script" uid="uid://dacldvpcy4t0q" path="res://scenes/start_menu/back_button.gd" id="2_m7x51"]
 [ext_resource type="Script" uid="uid://bff5us1dq52ek" path="res://scenes/start_menu/start_button.gd" id="3_ujype"]
+=======
+[gd_scene format=3 uid="uid://656mc2aohf1"]
+
+[ext_resource type="Script" path="res://scenes/start_menu/start_menu.gd" id="1_thu50"]
+[ext_resource type="Script" path="res://scenes/start_menu/back_button.gd" id="2_m7x51"]
+[ext_resource type="Script" path="res://scenes/start_menu/start_button.gd" id="3_ujype"]
+>>>>>>> Stashed changes
 
 [node name="Start Menu" type="Node2D" unique_id=1067580395]
 script = ExtResource("1_thu50")
