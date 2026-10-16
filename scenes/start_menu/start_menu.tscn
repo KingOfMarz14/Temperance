@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://gnmu7v4xipal"]
+
+[ext_resource type="Script" uid="uid://co1fsahuygdrw" path="res://scenes/start_menu/start_menu.gd" id="1_thu50"]
+[ext_resource type="Script" uid="uid://dacldvpcy4t0q" path="res://scenes/start_menu/back_button.gd" id="2_m7x51"]
+[ext_resource type="Script" uid="uid://bff5us1dq52ek" path="res://scenes/start_menu/start_button.gd" id="3_ujype"]
+
+[node name="Start Menu" type="Node2D" unique_id=1067580395]
+script = ExtResource("1_thu50")
+
+[node name="Button Manager" type="Control" parent="." unique_id=1047478714]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Back Button" type="Button" parent="Button Manager" unique_id=1777276829]
+layout_mode = 0
+offset_right = 183.0
+offset_bottom = 132.0
+text = "Back button, returns 
+to main menu"
+script = ExtResource("2_m7x51")
+
+[node name="Start Button" type="Button" parent="Button Manager" unique_id=162921775]
+layout_mode = 0
+offset_left = 319.0
+offset_top = 205.0
+offset_right = 874.0
+offset_bottom = 412.0
+text = "Start the game"
+script = ExtResource("3_ujype")
+
+[connection signal="pressed" from="Button Manager/Back Button" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Button Manager/Start Button" to="." method="_on_start_button_pressed"]

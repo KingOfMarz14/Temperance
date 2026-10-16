@@ -1,0 +1,221 @@
+[gd_scene format=3 uid="uid://c7fwmq2dwy4mb"]
+
+[ext_resource type="Script" uid="uid://degefku1e4k7j" path="res://scenes/bar/bar.gd" id="1_wj5ec"]
+[ext_resource type="PackedScene" uid="uid://bcp2w71uw57yc" path="res://customer.tscn" id="2_tcu61"]
+[ext_resource type="Script" uid="uid://t2sj5odpfh8l" path="res://scenes/bar/spirit_menu.gd" id="3_tcu61"]
+[ext_resource type="Script" uid="uid://bgxy0nh8x7xw2" path="res://scenes/bar/spirits_list.gd" id="4_4ex4t"]
+[ext_resource type="Script" uid="uid://bkoemsxj2a5pq" path="res://scenes/bar/mix_in_list.gd" id="5_uolcu"]
+
+[node name="Bar" type="Node2D" unique_id=1433516175]
+script = ExtResource("1_wj5ec")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=12702087]
+
+[node name="LibraryScreen" type="Node2D" parent="." unique_id=67347394]
+
+[node name="CustomerLayer" type="Node2D" parent="LibraryScreen" unique_id=1846962006]
+position = Vector2(576, 0)
+
+[node name="Background" type="ColorRect" parent="LibraryScreen/CustomerLayer" unique_id=725718520]
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 648.0
+color = Color(0.6096098, 0.5166635, 0.9634841, 1)
+
+[node name="Spot1" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=2013352281]
+position = Vector2(-432, 350)
+
+[node name="Customer" parent="LibraryScreen/CustomerLayer/Spot1" unique_id=777165008 instance=ExtResource("2_tcu61")]
+
+[node name="Spot2" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=1328450531]
+position = Vector2(-144, 350)
+
+[node name="Spot3" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=1725632394]
+position = Vector2(144, 350)
+
+[node name="Spot4" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=611019373]
+position = Vector2(432, 350)
+
+[node name="CounterLayer" type="Node2D" parent="LibraryScreen" unique_id=52547281]
+position = Vector2(0, 500)
+
+[node name="Counter" type="ColorRect" parent="LibraryScreen/CounterLayer" unique_id=528811322]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.7186083, 0.59331846, 0.9240934, 1)
+
+[node name="spirit_menu" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=239660253]
+layout_mode = 0
+offset_left = 62.0
+offset_top = 46.0
+offset_right = 301.0
+offset_bottom = 200.0
+text = "Spirit Menu"
+script = ExtResource("3_tcu61")
+
+[node name="spirits_list" type="ItemList" parent="LibraryScreen/CounterLayer/Counter/spirit_menu" unique_id=519048977]
+layout_mode = 0
+offset_top = -10.0
+offset_right = 270.0
+offset_bottom = 441.0
+item_count = 6
+item_0/text = "Gin"
+item_1/text = "Whiskey"
+item_2/text = "Rum"
+item_3/text = "Brandy"
+item_4/text = "Moonshine"
+item_5/text = "Scotch"
+script = ExtResource("4_4ex4t")
+
+[node name="mix-in_menu" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=1314829062]
+layout_mode = 0
+offset_left = 335.0
+offset_top = 44.0
+offset_right = 576.0
+offset_bottom = 482.0
+text = "Mix-in Menu"
+
+[node name="mix-in_list" type="ItemList" parent="LibraryScreen/CounterLayer/Counter/mix-in_menu" unique_id=1073717689]
+layout_mode = 0
+offset_top = -9.0
+offset_right = 263.0
+offset_bottom = 443.0
+item_count = 12
+item_0/text = "Lemon Juice"
+item_1/text = "Honey"
+item_2/text = "Grenadine"
+item_3/text = "Maraschino Liquer"
+item_4/text = "Pineapple Juice"
+item_5/text = "Sweet Vermouth"
+item_6/text = "Triple Sec"
+item_7/text = "Chartreuse Green"
+item_8/text = "Cola"
+item_9/text = "Ginger Ale"
+item_10/text = "Seltzer"
+item_11/text = "Simple Syrup"
+script = ExtResource("5_uolcu")
+
+[node name="garnish_menu" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=632430372]
+layout_mode = 0
+offset_left = 605.0
+offset_top = 40.0
+offset_right = 830.0
+offset_bottom = 301.0
+text = "Garnish Menu"
+
+[node name="garnish_list" type="ItemList" parent="LibraryScreen/CounterLayer/Counter/garnish_menu" unique_id=1226087602]
+layout_mode = 0
+offset_right = 272.0
+offset_bottom = 440.0
+item_count = 6
+item_0/text = "Lemon Twist"
+item_1/text = "Orange Twist"
+item_2/text = "Cherries"
+item_3/text = "Mint"
+item_4/text = "Lemon Slice"
+item_5/text = "Orange Slice"
+
+[node name="mixer" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=676957543]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 379.0
+offset_right = 258.0
+offset_bottom = 478.0
+text = "Mixer"
+
+[node name="bar_mat" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=542270664]
+layout_mode = 0
+offset_left = 881.0
+offset_top = 41.0
+offset_right = 1094.0
+offset_bottom = 480.0
+text = "Bar Mat (up to 2)"
+
+[node name="shaker" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=1834950838]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 249.0
+offset_right = 256.0
+offset_bottom = 348.0
+text = "Shaker
+"
+
+[node name="ToolkitScreen" type="Node2D" parent="." unique_id=420253463]
+position = Vector2(1152, 0)
+
+[node name="CustomerLayer" type="Node2D" parent="ToolkitScreen" unique_id=1470800767]
+position = Vector2(576, 0)
+
+[node name="Background" type="ColorRect" parent="ToolkitScreen/CustomerLayer" unique_id=291563207]
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 648.0
+color = Color(0.6652961, 0.3802457, 0.3906972, 1)
+
+[node name="Spot5" type="Marker2D" parent="ToolkitScreen/CustomerLayer" unique_id=372100926]
+position = Vector2(-432, 350)
+
+[node name="Spot6" type="Marker2D" parent="ToolkitScreen/CustomerLayer" unique_id=1252495714]
+position = Vector2(-144, 350)
+
+[node name="Spot7" type="Marker2D" parent="ToolkitScreen/CustomerLayer" unique_id=1025629739]
+position = Vector2(144, 350)
+
+[node name="Spot8" type="Marker2D" parent="ToolkitScreen/CustomerLayer" unique_id=1069086600]
+position = Vector2(432, 350)
+
+[node name="CounterLayer" type="Node2D" parent="ToolkitScreen" unique_id=513142975]
+position = Vector2(0, 500)
+
+[node name="Counter" type="ColorRect" parent="ToolkitScreen/CounterLayer" unique_id=647544666]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.86642814, 0.59456724, 0.61878717, 1)
+
+[node name="trash" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=149277607]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 8.0
+offset_right = 526.0
+offset_bottom = 305.0
+text = "Trash
+"
+
+[node name="ice" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1216273017]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 317.0
+offset_right = 523.0
+offset_bottom = 482.0
+text = "Ice"
+
+[node name="non-alcohol" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1969059944]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 9.0
+offset_right = 705.0
+offset_bottom = 482.0
+text = "Non-alcohol"
+
+[node name="glasses" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=2071397736]
+layout_mode = 0
+offset_left = 926.0
+offset_top = 60.0
+offset_right = 1139.0
+offset_bottom = 481.0
+text = "Glasses"
+
+[node name="bar_mat" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1404427508]
+layout_mode = 0
+offset_left = 709.0
+offset_top = 58.0
+offset_right = 923.0
+offset_bottom = 482.0
+text = "Bar Mat (up to 2)"
+
+[connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/spirit_menu" to="." method="_on_spirit_menu_pressed"]
+[connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list" to="." method="_on_spirits_list_item_clicked"]
+[connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/mix-in_menu" to="." method="_on_mixin_menu_pressed"]
+[connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list" to="." method="_on_mixin_list_item_clicked"]
+[connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/garnish_menu" to="." method="_on_garnish_menu_pressed"]
+[connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list" to="." method="_on_garnish_list_item_clicked"]

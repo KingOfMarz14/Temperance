@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://b1ugug67gkc7p"]
+
+[ext_resource type="Script" uid="uid://capv5wgfl88ff" path="res://scenes/game.gd" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://p4pnimwyctgj" path="res://scenes/drink_class.gd" id="2_lnu2h"]
+
+[node name="Game" type="Node2D" unique_id=357713896]
+script = ExtResource("1_yqjtg")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=93073527]
+position = Vector2(577, 325)
+
+[node name="Drink Class" type="Sprite2D" parent="." unique_id=912055357]
+script = ExtResource("2_lnu2h")
+
+[node name="Ingredients" type="Control" parent="." unique_id=2048599419]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="spirit_menu" type="Button" parent="Ingredients" unique_id=986877432]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 195.0
+offset_right = 315.0
+offset_bottom = 349.0
+text = "Spirit Menu"
+
+[node name="mix-in_menu" type="Button" parent="Ingredients" unique_id=1762562314]
+layout_mode = 0
+offset_left = 349.0
+offset_top = 193.0
+offset_right = 590.0
+offset_bottom = 631.0
+text = "Mix-in Menu"
+
+[node name="garnish_menu" type="Button" parent="Ingredients" unique_id=19894844]
+layout_mode = 0
+offset_left = 619.0
+offset_top = 189.0
+offset_right = 844.0
+offset_bottom = 450.0
+text = "Garnish Menu"
+
+[node name="mixer" type="Button" parent="Ingredients" unique_id=1974509085]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 528.0
+offset_right = 272.0
+offset_bottom = 627.0
+text = "Mixer"
+
+[node name="bar_mat" type="Button" parent="Ingredients" unique_id=63807789]
+layout_mode = 0
+offset_left = 895.0
+offset_top = 190.0
+offset_right = 1108.0
+offset_bottom = 629.0
+text = "Bar Mat"
+
+[node name="shaker" type="Button" parent="Ingredients" unique_id=717538039]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 398.0
+offset_right = 270.0
+offset_bottom = 497.0
+text = "Shaker
+"
+
+[connection signal="pressed" from="Ingredients/spirit_menu" to="." method="_on_spirit_1_pressed"]
+[connection signal="pressed" from="Ingredients/mix-in_menu" to="." method="_on_mixin_1_pressed"]
+[connection signal="pressed" from="Ingredients/garnish_menu" to="." method="_on_garnish_1_pressed"]
