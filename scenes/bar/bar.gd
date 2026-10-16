@@ -12,7 +12,7 @@ const LOOK_TIME = 0.3               # Seconds the effect takes
 
 var screen_index := 0       # 0 = The Library, 1 = The Toolkit
 var looking_down := false
-var drink = Drink.new()
+var current 
 
 @onready var camera: Camera2D = $Camera2D
 @onready var screens = [$LibraryScreen, $ToolkitScreen]
@@ -26,6 +26,7 @@ func _ready():
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
+	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.hide()
 
 
 func _unhandled_input(event):
@@ -81,17 +82,34 @@ func _on_mixin_menu_pressed() -> void:
 func _on_garnish_menu_pressed() -> void:
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.show()
 
+func _on_glasses_menu_pressed() -> void:
+	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.show()
 
 func _on_spirits_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
-	drink.spirit = $LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.get_item_text(index)
-	print(drink.spirit)
+	current.spirit = $LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.get_item_text(index)
+	print(current.spirit)
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
 
 
 func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
-	drink.mix = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
+	current.mix = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
+	print(current.mix)
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 
 
 func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
-	pass # Replace with function body.
+	current.garnish = $LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.get_item_text(index)
+	print(current.garnish)
+	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
+
+
+func _on_glasses_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+	current = Drink.new()
+	current.glass = $ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.get_item_text(index)
+	print(current.glass)
+	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.hide()
+
+
+func _on_ice_pressed() -> void:
+	current.ice = true
+	print(current.ice)
