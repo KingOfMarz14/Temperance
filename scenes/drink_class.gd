@@ -1,10 +1,10 @@
 class_name Drink
 extends Node
 
-var _glass
-var _spirit
-var _mix
-var _garnish
+var _glass = null
+var _spirit = [null, null]
+var _mix = [null, null, null]
+var _garnish = [null, null]
 var _ice = false
 var _shaken = false
 var _stirred = false
@@ -27,21 +27,28 @@ var glass:
 var spirit:
 	get:
 		return _spirit;
-	set(x):
-		_spirit = x;
+
+func set_spirit(x, y):
+	_spirit[0] = x;
+	_spirit[1] = y
 
 var mix:
 	get:
 		return _mix;
-	set(x):
-		_mix = x;
+	
+func set_mix(x, y, z):
+	_mix[0] = x;
+	_mix[1] = y;
+	_mix[2] = z;
 
 var garnish:
 	get:
 		return _garnish;
-	set(x):
-		_garnish = x;
-		
+
+func set_garnish(x, y):
+	_garnish[0] = x;
+	_garnish[1] = y;
+	
 
 var ice:
 	get:
