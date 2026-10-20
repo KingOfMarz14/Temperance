@@ -197,13 +197,24 @@ offset_right = 705.0
 offset_bottom = 482.0
 text = "Non-alcohol"
 
-[node name="glasses" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=2071397736]
+[node name="glasses_menu" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=2071397736]
 layout_mode = 0
 offset_left = 926.0
 offset_top = 60.0
 offset_right = 1139.0
 offset_bottom = 481.0
 text = "Glasses"
+
+[node name="glasses_list" type="ItemList" parent="ToolkitScreen/CounterLayer/Counter/glasses_menu" unique_id=1987495431]
+layout_mode = 0
+offset_right = 215.0
+offset_bottom = 422.0
+item_count = 5
+item_0/text = "Rocks Glass"
+item_1/text = "Cocktail Glass"
+item_2/text = "Coupe Glass"
+item_3/text = "Liqueur Glass"
+item_4/text = "Zombie Glass"
 
 [node name="bar_mat" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1404427508]
 layout_mode = 0
@@ -219,3 +230,6 @@ text = "Bar Mat (up to 2)"
 [connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list" to="." method="_on_mixin_list_item_clicked"]
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/garnish_menu" to="." method="_on_garnish_menu_pressed"]
 [connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list" to="." method="_on_garnish_list_item_clicked"]
+[connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/ice" to="." method="_on_ice_pressed"]
+[connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/glasses_menu" to="." method="_on_glasses_menu_pressed"]
+[connection signal="item_clicked" from="ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list" to="." method="_on_glasses_list_item_clicked"]

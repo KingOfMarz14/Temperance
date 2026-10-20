@@ -12,7 +12,7 @@ const LOOK_TIME = 0.3               # Seconds the effect takes
 
 var screen_index := 0       # 0 = The Library, 1 = The Toolkit
 var looking_down := false
-var drink = Drink.new()
+var current 
 
 @onready var camera: Camera2D = $Camera2D
 @onready var screens = [$LibraryScreen, $ToolkitScreen]
@@ -26,6 +26,7 @@ func _ready():
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
+	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.hide()
 
 
 func _unhandled_input(event):
@@ -81,17 +82,75 @@ func _on_mixin_menu_pressed() -> void:
 func _on_garnish_menu_pressed() -> void:
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.show()
 
+func _on_glasses_menu_pressed() -> void:
+	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.show()
 
 func _on_spirits_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
-	drink.spirit = $LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.get_item_text(index)
-	print(drink.spirit)
+	if no_glass():
+		$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
+		return
+	
+	if (current._spirit[0] == null):
+		current._spirit[0] = $LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.get_item_text(index)
+	elif (current._spirit[1] == null):
+		current._spirit[1] = $LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.get_item_text(index)
+	
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
+	print(current.spirit[0])
+	print(current.spirit[1])
+	
 
 
 func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
-	drink.mix = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
+	if no_glass():
+		$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
+		return
+
+	if (current._mix[0] == null):
+		current._mix[0] = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
+	elif (current._mix[1] == null):
+		current._mix[1] = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
+	elif (current._mix[2] == null):
+		current._mix[2] = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
+	
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
+	print(current.mix[0])
+	print(current.mix[1])
+	print(current.mix[2])
+
 
 
 func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
-	pass # Replace with function body.
+	if no_glass():
+		$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
+		return
+	
+	if (current._garnish[0] == null):
+		current._garnish[0] = $LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.get_item_text(index)
+	elif (current._garnish[1] == null):
+		current._garnish[1] = $LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.get_item_text(index)
+	
+	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
+	print(current.garnish[0])
+	print(current.garnish[1])
+
+
+func _on_glasses_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+	current = Drink.new()
+	current.glass = $ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.get_item_text(index)
+	print(current.glass)
+	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.hide()
+
+
+func _on_ice_pressed() -> void:
+	if no_glass():
+		return
+
+	current.ice = true
+	print(current.ice)
+
+func no_glass() -> bool:
+	if (current == null):
+		print("Select a glass first!")
+		return true
+	return false
