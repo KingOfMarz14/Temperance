@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7fwmq2dwy4mb"]
 
 [ext_resource type="Script" uid="uid://degefku1e4k7j" path="res://scenes/bar/bar.gd" id="1_wj5ec"]
-[ext_resource type="PackedScene" uid="uid://bcp2w71uw57yc" path="res://customer.tscn" id="2_tcu61"]
+[ext_resource type="PackedScene" path="res://scenes/customers/customer_manager.tscn" id="2_cmgr"]
 [ext_resource type="Script" uid="uid://t2sj5odpfh8l" path="res://scenes/bar/spirit_menu.gd" id="3_tcu61"]
 [ext_resource type="Script" uid="uid://bgxy0nh8x7xw2" path="res://scenes/bar/spirits_list.gd" id="4_4ex4t"]
 [ext_resource type="Script" uid="uid://bkoemsxj2a5pq" path="res://scenes/bar/mix_in_list.gd" id="5_uolcu"]
@@ -11,21 +11,29 @@ script = ExtResource("1_wj5ec")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=12702087]
 
+[node name="Backdrop" type="Node2D" parent="." unique_id=1844312201]
+
+[node name="LibraryWall" type="ColorRect" parent="Backdrop" unique_id=1844312202]
+offset_left = -200.0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.6096098, 0.5166635, 0.9634841, 1)
+
+[node name="ToolkitWall" type="ColorRect" parent="Backdrop" unique_id=1844312203]
+offset_left = 1152.0
+offset_right = 2504.0
+offset_bottom = 648.0
+mouse_filter = 2
+color = Color(0.6652961, 0.3802457, 0.3906972, 1)
+
 [node name="LibraryScreen" type="Node2D" parent="." unique_id=67347394]
 
 [node name="CustomerLayer" type="Node2D" parent="LibraryScreen" unique_id=1846962006]
 position = Vector2(576, 0)
 
-[node name="Background" type="ColorRect" parent="LibraryScreen/CustomerLayer" unique_id=725718520]
-offset_left = -576.0
-offset_right = 576.0
-offset_bottom = 648.0
-color = Color(0.6096098, 0.5166635, 0.9634841, 1)
-
 [node name="Spot1" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=2013352281]
 position = Vector2(-432, 350)
-
-[node name="Customer" parent="LibraryScreen/CustomerLayer/Spot1" unique_id=777165008 instance=ExtResource("2_tcu61")]
 
 [node name="Spot2" type="Marker2D" parent="LibraryScreen/CustomerLayer" unique_id=1328450531]
 position = Vector2(-144, 350)
@@ -146,12 +154,6 @@ position = Vector2(1152, 0)
 [node name="CustomerLayer" type="Node2D" parent="ToolkitScreen" unique_id=1470800767]
 position = Vector2(576, 0)
 
-[node name="Background" type="ColorRect" parent="ToolkitScreen/CustomerLayer" unique_id=291563207]
-offset_left = -576.0
-offset_right = 576.0
-offset_bottom = 648.0
-color = Color(0.6652961, 0.3802457, 0.3906972, 1)
-
 [node name="Spot5" type="Marker2D" parent="ToolkitScreen/CustomerLayer" unique_id=372100926]
 position = Vector2(-432, 350)
 
@@ -223,6 +225,8 @@ offset_top = 58.0
 offset_right = 923.0
 offset_bottom = 482.0
 text = "Bar Mat (up to 2)"
+
+[node name="CustomerManager" parent="." unique_id=1844312210 instance=ExtResource("2_cmgr")]
 
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/spirit_menu" to="." method="_on_spirit_menu_pressed"]
 [connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list" to="." method="_on_spirits_list_item_clicked"]
