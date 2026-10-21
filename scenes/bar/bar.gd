@@ -1,28 +1,37 @@
 extends Node2D
 
-# Size of one screen. Match this to Project Settings > Display > Window.
+# size of one screen
 const SCREEN_WIDTH = 1152
 
-# How the "look down" effect behaves. Tweak these to taste.
-const COUNTER_Y_UP = 500.0          # Looking up: only the counter's top edge peeks in
-const COUNTER_Y_DOWN = 150.0        # Looking down: counter rises to fill the screen
-const CUSTOMER_SCALE_DOWN = 0.85    # Customers shrink to 85% size
-const CUSTOMER_ALPHA_DOWN = 0.4     # Customers fade to 40% visible
-const LOOK_TIME = 0.3               # Seconds the effect takes
+# look-down behavior
+const COUNTER_Y_UP = 500.0
+const COUNTER_Y_DOWN = 150.0
+const CUSTOMER_SCALE_DOWN = 0.85
+const CUSTOMER_ALPHA_DOWN = 0.4
+const BACKDROP_DIM_DOWN = 0.7
+const LOOK_TIME = 0.3
+const MOVE_TIME = 0.25
 
-var screen_index := 0       # 0 = The Library, 1 = The Toolkit
+var screen_index := 0     # 0 = The Library, 1 = The Toolkit
 var looking_down := false
 var current 
 
 @onready var camera: Camera2D = $Camera2D
 @onready var screens = [$LibraryScreen, $ToolkitScreen]
+@onready var backdrop: Node2D = $Backdrop
+
+
+var shrink_layers: Array[Node2D] = []
+var base_positions: Array[Vector2] = []
 
 
 func _ready():
-	# Make the camera's position mark the top-left corner of what you see.
 	camera.anchor_mode = Camera2D.ANCHOR_MODE_FIXED_TOP_LEFT
 	camera.position = Vector2.ZERO
-	_apply_look(false)  # Set the starting look instantly, no animation
+	shrink_layers = [backdrop, $LibraryScreen/CustomerLayer, $ToolkitScreen/CustomerLayer]
+	for layer in shrink_layers:
+		base_positions.append(layer.position)
+	_apply_look(false)
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
@@ -44,31 +53,49 @@ func _unhandled_input(event):
 		_apply_look(true)
 
 
-# Slide the camera sideways to the current screen.
+# sideways movement
 func _move_camera():
 	var tween = create_tween()
-	tween.tween_property(camera, "position:x", screen_index * SCREEN_WIDTH, 0.25)
+	tween.tween_property(camera, "position:x", screen_index * SCREEN_WIDTH, MOVE_TIME)
+	# recenter shrink when looking down
+	if looking_down:
+		_apply_look(true, MOVE_TIME)
 
 
-# Shrink/fade the customers and raise/lower the counter on BOTH screens,
-# so the other screen already matches if the player presses A or D.
-func _apply_look(animate: bool):
-	var customer_scale = Vector2.ONE * (CUSTOMER_SCALE_DOWN if looking_down else 1.0)
-	var customer_alpha = CUSTOMER_ALPHA_DOWN if looking_down else 1.0
+# background and characters shrink toward top center
+func _apply_look(animate: bool, duration: float = LOOK_TIME):
+	var s = CUSTOMER_SCALE_DOWN if looking_down else 1.0
+	var alpha = CUSTOMER_ALPHA_DOWN if looking_down else 1.0
 	var counter_y = COUNTER_Y_DOWN if looking_down else COUNTER_Y_UP
+	var pivot = Vector2(screen_index * SCREEN_WIDTH + SCREEN_WIDTH / 2.0, 0)
+
+	var tween: Tween = null
+	if animate:
+		tween = create_tween().set_parallel(true)  # everything at once
+
+	for i in shrink_layers.size():
+		var layer = shrink_layers[i]
+		var parent_offset = (layer.get_parent() as Node2D).position
+		var normal_global = parent_offset + base_positions[i]
+		var new_position = pivot + (normal_global - pivot) * s - parent_offset
+		var tint = Color(1, 1, 1, alpha)
+		if layer == backdrop:
+			var dim = BACKDROP_DIM_DOWN if looking_down else 1.0
+			tint = Color(dim, dim, dim, 1)
+		if animate:
+			tween.tween_property(layer, "scale", Vector2.ONE * s, duration)
+			tween.tween_property(layer, "position", new_position, duration)
+			tween.tween_property(layer, "modulate", tint, duration)
+		else:
+			layer.scale = Vector2.ONE * s
+			layer.position = new_position
+			layer.modulate = tint
 
 	for screen in screens:
-		var customers = screen.get_node("CustomerLayer")
 		var counter = screen.get_node("CounterLayer")
-
 		if animate:
-			var tween = create_tween().set_parallel(true)  # all three at once
-			tween.tween_property(customers, "scale", customer_scale, LOOK_TIME)
-			tween.tween_property(customers, "modulate:a", customer_alpha, LOOK_TIME)
-			tween.tween_property(counter, "position:y", counter_y, LOOK_TIME)
+			tween.tween_property(counter, "position:y", counter_y, duration)
 		else:
-			customers.scale = customer_scale
-			customers.modulate.a = customer_alpha
 			counter.position.y = counter_y
 
 func _on_spirit_menu_pressed() -> void:
