@@ -178,6 +178,6 @@ func _on_ice_pressed() -> void:
 
 func no_glass() -> bool:
 	if (current == null):
-		print("Select a glass first!")
+		$CustomerManager._flash_message("Select a glass first!")
 		return true
 	return false
