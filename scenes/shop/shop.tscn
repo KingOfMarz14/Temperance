@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cmovdbpoh14am"]
+
+[ext_resource type="Script" uid="uid://x65ej076c7qu" path="res://scenes/shop/shop.gd" id="1_100s2"]
+
+[node name="Shop" type="Node2D" unique_id=343443343]
+script = ExtResource("1_100s2")
+
+[node name="shop_demo" type="Control" parent="." unique_id=428807482]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="shop_demo_button" type="Button" parent="shop_demo" unique_id=217211161]
+layout_mode = 0
+offset_right = 1159.0
+offset_bottom = 647.0
+text = "Shop menu still being built sorry :("
+
+[connection signal="pressed" from="shop_demo/shop_demo_button" to="." method="_on_shop_demo_button_pressed"]

@@ -139,6 +139,20 @@ offset_right = 1094.0
 offset_bottom = 480.0
 text = "Bar Mat (up to 2)"
 
+[node name="bar_mat_drink1" type="Button" parent="LibraryScreen/CounterLayer/Counter/bar_mat" unique_id=2005832324]
+layout_mode = 0
+offset_right = 215.0
+offset_bottom = 219.0
+text = "Drink 1"
+
+[node name="bar_mat_drink2" type="Button" parent="LibraryScreen/CounterLayer/Counter/bar_mat" unique_id=867449725]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 219.0
+offset_right = 216.0
+offset_bottom = 437.0
+text = "Drink 2"
+
 [node name="shaker" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=1834950838]
 layout_mode = 0
 offset_left = 96.0
@@ -197,7 +211,7 @@ offset_left = 532.0
 offset_top = 9.0
 offset_right = 705.0
 offset_bottom = 482.0
-text = "Non-alcohol"
+text = "Consumables"
 
 [node name="glasses_menu" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=2071397736]
 layout_mode = 0
@@ -224,7 +238,8 @@ offset_left = 709.0
 offset_top = 58.0
 offset_right = 923.0
 offset_bottom = 482.0
-text = "Bar Mat (up to 2)"
+text = "Bar Mat (up to 2) or 
+Purifier"
 
 [node name="CustomerManager" parent="." unique_id=1844312210 instance=ExtResource("2_cmgr")]
 
@@ -234,6 +249,10 @@ text = "Bar Mat (up to 2)"
 [connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list" to="." method="_on_mixin_list_item_clicked"]
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/garnish_menu" to="." method="_on_garnish_menu_pressed"]
 [connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list" to="." method="_on_garnish_list_item_clicked"]
+[connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/bar_mat" to="." method="_on_bar_mat_pressed"]
+[connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1" to="." method="_on_bar_mat_drink_1_pressed"]
+[connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2" to="." method="_on_bar_mat_drink_2_pressed"]
+[connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/trash" to="." method="_on_trash_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/ice" to="." method="_on_ice_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/glasses_menu" to="." method="_on_glasses_menu_pressed"]
 [connection signal="item_clicked" from="ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list" to="." method="_on_glasses_list_item_clicked"]

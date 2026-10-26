@@ -15,6 +15,9 @@ const MOVE_TIME = 0.25
 var screen_index := 0     # 0 = The Library, 1 = The Toolkit
 var looking_down := false
 var current 
+var barmatdrink1
+var barmatdrink2
+var barmat: Array[Drink] = [barmatdrink1, barmatdrink2]
 
 @onready var camera: Camera2D = $Camera2D
 @onready var screens = [$LibraryScreen, $ToolkitScreen]
@@ -36,7 +39,8 @@ func _ready():
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
 	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.hide()
-
+	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1.hide()
+	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2.hide()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("move_left") and screen_index > 0:
@@ -181,3 +185,53 @@ func no_glass() -> bool:
 		$CustomerManager._flash_message("Select a glass first!")
 		return true
 	return false
+
+
+func _on_trash_pressed() -> void:
+	if (current != null):
+		current = null
+		$CustomerManager._flash_message("Drink has been thrown away")
+	elif (no_glass()):
+		$CustomerManager._flash_message("Nothing to throw away")
+
+
+func _on_bar_mat_pressed() -> void:
+	if (current != null):
+		if (barmat[0] == null):
+			barmat[0] = current
+			$CustomerManager._flash_message("Current drink set on bar mat")
+			current = null
+		elif (barmat[1] == null):
+			barmat[1] = current
+			current = null
+			$CustomerManager._flash_message("Current drink set on bar mat")
+		else:
+			$CustomerManager._flash_message("Click on a drink to swap it with what's currently in your hand")
+			$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1.show()
+			$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2.show()
+			
+			
+	elif (barmat[0] != null):
+		$CustomerManager._flash_message("Select a drink from the bar mat")
+		$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1.show()
+	elif (barmat[1] != null):
+		$CustomerManager._flash_message("Select a drink from the bar mat")
+		$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2.show()
+	else:
+		$CustomerManager._flash_message("Nothing to set down")
+
+
+func _on_bar_mat_drink_1_pressed() -> void:
+	var temp = barmat[0]
+	barmat[0] = current
+	current = temp
+	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1.hide()
+	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2.hide()
+
+
+func _on_bar_mat_drink_2_pressed() -> void:
+	var temp = barmat[1]
+	barmat[1] = current
+	current = temp
+	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1.hide()
+	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2.hide()
