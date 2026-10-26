@@ -127,8 +127,6 @@ func _on_spirits_list_item_clicked(index: int, at_position: Vector2, mouse_butto
 		current._spirit[1] = $LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.get_item_text(index)
 	
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
-	print(current.spirit[0])
-	print(current.spirit[1])
 	
 
 
@@ -145,10 +143,6 @@ func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_
 		current._mix[2] = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
 	
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
-	print(current.mix[0])
-	print(current.mix[1])
-	print(current.mix[2])
-
 
 
 func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
@@ -162,14 +156,11 @@ func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_butto
 		current._garnish[1] = $LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.get_item_text(index)
 	
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
-	print(current.garnish[0])
-	print(current.garnish[1])
 
 
 func _on_glasses_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
 	current = Drink.new()
 	current.glass = $ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.get_item_text(index)
-	print(current.glass)
 	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.hide()
 
 
@@ -178,7 +169,6 @@ func _on_ice_pressed() -> void:
 		return
 
 	current.ice = true
-	print(current.ice)
 
 func no_glass() -> bool:
 	if (current == null):

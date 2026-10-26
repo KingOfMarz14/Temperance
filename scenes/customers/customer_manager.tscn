@@ -1,61 +1,67 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dlkabgak7fxgg"]
 
-[ext_resource type="Script" path="res://scenes/customers/customer_manager.gd" id="1_mgr"]
+[ext_resource type="Script" uid="uid://cacb4w8igwdfv" path="res://scenes/customers/customer_manager.gd" id="1_mgr"]
+[ext_resource type="Script" uid="uid://bnsuj8p0xg253" path="res://scenes/customers/customer_type.gd" id="2_4n0dr"]
 [ext_resource type="Resource" path="res://scenes/customers/mothman.tres" id="2_moth"]
 [ext_resource type="Resource" path="res://scenes/customers/arachnia.tres" id="3_arach"]
 
-[node name="CustomerManager" type="Node"]
+[node name="CustomerManager" type="Node" unique_id=89587130]
 script = ExtResource("1_mgr")
-customer_types = Array[Resource]([ExtResource("2_moth"), ExtResource("3_arach")])
+customer_types = Array[ExtResource("2_4n0dr")]([ExtResource("2_moth"), ExtResource("3_arach")])
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1083694608]
 
-[node name="Info" type="Label" parent="HUD"]
+[node name="Info" type="Label" parent="HUD" unique_id=485449045]
 offset_left = 16.0
 offset_top = 10.0
 offset_right = 900.0
 offset_bottom = 40.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
 text = "Day 1"
 
-[node name="Message" type="Label" parent="HUD"]
+[node name="Message" type="Label" parent="HUD" unique_id=352574617]
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 44.0
 offset_bottom = 74.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 0.9, 0.5, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 
-[node name="DayOver" type="CenterContainer" parent="HUD"]
+[node name="DayOver" type="CenterContainer" parent="HUD" unique_id=1552295690]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="PanelContainer" parent="HUD/DayOver"]
+[node name="Panel" type="PanelContainer" parent="HUD/DayOver" unique_id=608341054]
 layout_mode = 2
 
-[node name="VBox" type="VBoxContainer" parent="HUD/DayOver/Panel"]
+[node name="VBox" type="VBoxContainer" parent="HUD/DayOver/Panel" unique_id=1955510362]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Result" type="Label" parent="HUD/DayOver/Panel/VBox"]
+[node name="Result" type="Label" parent="HUD/DayOver/Panel/VBox" unique_id=1789144820]
 layout_mode = 2
 theme_override_font_sizes/font_size = 26
-horizontal_alignment = 1
 text = "Day complete!"
+horizontal_alignment = 1
 
-[node name="Continue" type="Button" parent="HUD/DayOver/Panel/VBox"]
+[node name="Continue" type="Button" parent="HUD/DayOver/Panel/VBox" unique_id=2119670527]
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 text = "Next day"
+
+[node name="Shop" type="Button" parent="HUD/DayOver/Panel/VBox" unique_id=1691646577]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+text = "Shop"
+
+[connection signal="pressed" from="HUD/DayOver/Panel/VBox/Shop" to="." method="_on_shop_pressed"]

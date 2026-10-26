@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c7fwmq2dwy4mb"]
 
 [ext_resource type="Script" uid="uid://degefku1e4k7j" path="res://scenes/bar/bar.gd" id="1_wj5ec"]
-[ext_resource type="PackedScene" path="res://scenes/customers/customer_manager.tscn" id="2_cmgr"]
+[ext_resource type="PackedScene" uid="uid://dlkabgak7fxgg" path="res://scenes/customers/customer_manager.tscn" id="2_cmgr"]
 [ext_resource type="Script" uid="uid://t2sj5odpfh8l" path="res://scenes/bar/spirit_menu.gd" id="3_tcu61"]
 [ext_resource type="Script" uid="uid://bgxy0nh8x7xw2" path="res://scenes/bar/spirits_list.gd" id="4_4ex4t"]
 [ext_resource type="Script" uid="uid://bkoemsxj2a5pq" path="res://scenes/bar/mix_in_list.gd" id="5_uolcu"]

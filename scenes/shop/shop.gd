@@ -12,4 +12,5 @@ func _process(delta: float) -> void:
 
 
 func _on_shop_demo_button_pressed() -> void:
-	pass # Replace with function body.
+	GameState.day += 1
+	get_tree().change_scene_to_file("res://scenes/bar/bar.tscn")
