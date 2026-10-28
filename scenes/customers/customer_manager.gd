@@ -106,24 +106,25 @@ func _on_customer_clicked(customer):
 func _serve(customer):
 	var drink: Drink = bar.current
 	var result = GameState.score(customer.order, drink, customer.increments_left())
+	if (bar.current._item == "Talis. Of The Exotics" && bar.current._quality.has("exotic")):
+		bar.multiplier = 1.1
+	if (bar.current._item == "Talis. Of The Unnatural" && bar.current._quality.has("unusual")):
+		bar.multiplier = 1.1
+	if (bar.current._item == "Talis. of The Basic" && bar.current._quality.has("basic")):
+		bar.multiplier = 1.1
+	if (bar.current._item == "Talis. of Herbal" && bar.current._quality.has("herbal")):
+		bar.multiplier = 1.1
+	if (bar.current._item == "Elixer of Quality"):
+		bar.multiplier = 1
+		
 	bar.current = null       # the drink is handed over
 	drink.free()
-	
-	if (bar.current.item == "Talis. Of The Exotics" && bar.current.quality.has("exotic")):
-		bar.multiplier = 1.1
-	if (bar.current.item == "Talis. Of The Unnatural" && bar.current.quality.has("unusual")):
-		bar.multiplier = 1.1
-	if (bar.current.item == "Talis. of The Basic" && bar.current.quality.has("basic")):
-		bar.multiplier = 1.1
-	if (bar.current.item == "Talis. of Herbal" && bar.current.quality.has("herbal")):
-		bar.multiplier = 1.1
 		
 	GameState.money += snapped(bar.multiplier * result.total, 0.01)
 	day_earnings += snapped(bar.multiplier * result.total, 0.01)
 	customer.receive_drink(result)
 	
-	if (bar.current.item == "Elixer of Quality"):
-		bar.multiplier = 1
+	
 	
 	_update_hud()
 

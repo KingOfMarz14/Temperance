@@ -151,29 +151,29 @@ func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_
 	elif (current._mix[2] == null):
 		current._mix[2] = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
 	
-	if (current.quality[0] == null):
+	if (current._quality[0] == null):
 		if (basic_quality.has(index)) :
-			current.quality[0] = "basic"
+			current._quality[0] = "basic"
 	else :
-		current.quality[1] = "basic"
+		current._quality[1] = "basic"
 		
-	if (current.quality[0] == null):
+	if (current._quality[0] == null):
 		if (herbal_quality.has(index)) :
-			current.quality[0] = "herbal"
+			current._quality[0] = "herbal"
 	else :
-		current.quality[1] = "herbal"
+		current._quality[1] = "herbal"
 		
-	if (current.quality[0] == null):
+	if (current._quality[0] == null):
 		if (exotic_quality.has(index)) :
-			current.quality[0] = "exotic"
+			current._quality[0] = "exotic"
 	else :
-		current.quality[1] = "exotic"
+		current._quality[1] = "exotic"
 	
-	if (current.quality[0] == null):
+	if (current._quality[0] == null):
 		if (unusual_quality.has(index)) :
-			current.quality[0] = "unusual"
+			current._quality[0] = "unusual"
 	else :
-		current.quality[1] = "unusual"
+		current._quality[1] = "unusual"
 		
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 
