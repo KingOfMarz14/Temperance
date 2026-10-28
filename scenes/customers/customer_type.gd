@@ -10,6 +10,9 @@ extends Resource
 ## swapped back and forth while they give their order
 @export var talk_frames: Array[Texture2D] = []
 
+## seconds they wait for you to take their order
+@export var wait_patience: float = 45.0
+
 ## seconds they wait for their drink after ordering
 ## this is set high for testing; CHANGE SOON
 @export var patience: float = 200.0
@@ -18,4 +21,8 @@ extends Resource
 @export var walk_speed: float = 350.0
 
 ## sprite size on screen (the art is drawn very large)
-@export var sprite_scale: float = 0.25
+@export var sprite_scale: float = 0.35
+
+## which row of the sprite (in image pixels) lines up with the top of the counter
+## everything below it is hidden behind the bar
+@export var counter_line: float = 900.0

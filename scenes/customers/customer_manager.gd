@@ -11,21 +11,31 @@ const NUM_SCREENS = 2
 ## characters that can show up (drag CustomerType files in here)
 @export var customer_types: Array[CustomerType] = []
 @export var first_customer_delay: float = 3
-@export var spawn_delay_min: float = 25.0 ## SLOW RN, CHANGE SOON
-@export var spawn_delay_max: float = 40.0 
+## seconds b/w customers on day 1
+@export var first_day_delay: float = 18.0
+## seconds b/w customers once it maxes out
+@export var fastest_delay: float = 8.0
+## day it stops getting faster
+@export var fastest_day: int = 10
+## random extra wait on top (0 to this many seconds)
+@export var delay_variation: float = 5.0
 
 var spots: Array[Marker2D] = []
 var customers_spawned := 0
 var customers_done := 0
 var day_earnings := 0.0
 var day_over := false
+var day_orders: Array = []
+var day_quota := 0.0
 
 @onready var bar = get_parent()
 @onready var hud_label: Label = $HUD/Info
+@onready var wallet_label: Label = $HUD/Wallet
 @onready var message_label: Label = $HUD/Message
 @onready var day_over_panel: Control = $HUD/DayOver
 @onready var day_over_label: Label = $HUD/DayOver/Panel/VBox/Result
 @onready var day_over_button: Button = $HUD/DayOver/Panel/VBox/Continue
+@onready var shop_button: Button = $HUD/DayOver/Panel/VBox/Shop
 
 
 func _ready():
@@ -38,6 +48,10 @@ func _ready():
 
 	for screen_name in ["LibraryScreen", "ToolkitScreen"]:
 		bar.get_node(screen_name + "/CounterLayer").z_index = 1
+
+	# todays orders + quota
+	day_orders = GameState.make_day_orders()
+	day_quota = GameState.quota_for(day_orders)
 
 	day_over_panel.visible = false
 	day_over_button.pressed.connect(_on_continue_pressed)
@@ -56,7 +70,14 @@ func _run_day():
 			await get_tree().create_timer(1.0).timeout   # bar is full so check agian soon
 			continue
 		_spawn_customer(spot)
-		await get_tree().create_timer(randf_range(spawn_delay_min, spawn_delay_max)).timeout
+		await get_tree().create_timer(spawn_delay()).timeout
+
+
+# gets a little shorter each day until fastest_day, then stays the same
+func spawn_delay() -> float:
+	var progress = clamp(float(GameState.day - 1) / (fastest_day - 1), 0.0, 1.0)
+	var base = lerp(first_day_delay, fastest_delay, progress)
+	return base + randf_range(0.0, delay_variation)
 
 
 func _free_spot() -> Marker2D:
@@ -72,6 +93,7 @@ func _spawn_customer(spot: Marker2D):
 		return
 	var customer = CUSTOMER_SCENE.instantiate()
 	customer.setup(customer_types.pick_random())
+	customer.preset_order = day_orders[customers_spawned]
 	spot.add_child(customer)
 	customer.clicked.connect(_on_customer_clicked)
 	customer.finished.connect(_on_customer_finished)
@@ -105,7 +127,7 @@ func _on_customer_clicked(customer):
 
 func _serve(customer):
 	var drink: Drink = bar.current
-	var result = GameState.score(customer.order, drink, customer.increments_left())
+	var result = GameState.score(customer.order, drink, customer.speed_left())
 	bar.current = null       # the drink is handed over
 	drink.free()
 	GameState.money += result.total
@@ -117,9 +139,9 @@ func _serve(customer):
 # hud
 
 func _update_hud():
-	hud_label.text = "Day %d    Today: $%.2f / $%.2f    Customers: %d / %d    Total: $%.2f" % [
-		GameState.day, day_earnings, GameState.quota_for_day(),
-		customers_done, GameState.customers_for_day(), GameState.money]
+	hud_label.text = "Day %d    Today: $%.2f / $%.2f" % [GameState.day, day_earnings, day_quota]
+	# all the money from every day so far (resets on a new run)
+	wallet_label.text = "Wallet: $%.2f" % GameState.money
 
 
 func _flash_message(text: String):
@@ -132,7 +154,8 @@ func _flash_message(text: String):
 
 func _end_day():
 	day_over = true
-	var quota = GameState.quota_for_day()
+	var quota = day_quota
+	shop_button.visible = day_earnings >= quota   # no shop if you closed down
 	if day_earnings >= quota:
 		day_over_label.text = "Day %d complete!\nYou made $%.2f (quota $%.2f)" % [GameState.day, day_earnings, quota]
 		day_over_button.text = "Next day"
@@ -143,7 +166,7 @@ func _end_day():
 
 
 func _on_continue_pressed():
-	if day_earnings >= GameState.quota_for_day():
+	if day_earnings >= day_quota:
 		GameState.day += 1
 		get_tree().reload_current_scene()
 	else:
