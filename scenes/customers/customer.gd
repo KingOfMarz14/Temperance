@@ -18,6 +18,10 @@ var type: CustomerType
 var order: Drink
 var state = State.WALKING_IN
 var hovered := false
+var top_y := 0.0              # top of the sprite (the customer's origin is the counter line)
+var current_patience := 0.0
+var preset_order: Drink = null   # the manager hands each customer their order ahead of time
+var wait_left := 0.0             # bars left on the waiting meter when you took the order    # whichever timer is running rn (waiting or drink)
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var bubble: PanelContainer = $Bubble
@@ -36,17 +40,22 @@ func _ready():
 	sprite.texture = type.neutral_sprite
 	sprite.scale = Vector2.ONE * type.sprite_scale
 	var size = sprite.texture.get_size() * type.sprite_scale
+	# line the counter_line row up with the counter
+	sprite.centered = false
+	sprite.offset = Vector2(-sprite.texture.get_width() / 2.0, -type.counter_line)
+	top_y = -type.counter_line * type.sprite_scale
 
-	# click box for character
+	# click box for character (only the part above the counter)
 	var shape = RectangleShape2D.new()
-	shape.size = size * 0.8
+	shape.size = Vector2(size.x * 0.8, -top_y)
 	click_shape.shape = shape
+	click_shape.position.y = top_y / 2.0
 	click_area.input_event.connect(_on_click_area_input_event)
 	click_area.mouse_entered.connect(func(): hovered = true; _update_bubble())
 	click_area.mouse_exited.connect(func(): hovered = false; _update_bubble())
 
 	# bubble
-	bubble.position.y = -size.y / 2.0 - BUBBLE_GAP
+	bubble.position.y = top_y - BUBBLE_GAP
 	var style = StyleBoxFlat.new()
 	style.bg_color = Color(1, 0.98, 0.92)
 	style.set_corner_radius_all(10)
@@ -56,7 +65,8 @@ func _ready():
 	bubble.visible = false
 
 	# patience
-	patience_bar.position = Vector2(-size.x * 0.42, -60)
+	# up near the shoulders so you can still see it when looking down
+	patience_bar.position = Vector2(-size.x * 0.42, top_y * 0.85)
 	for i in GameState.PATIENCE_INCREMENTS:
 		var segment = ColorRect.new()
 		segment.custom_minimum_size = Vector2(14, 20)
@@ -68,7 +78,7 @@ func _ready():
 
 
 func _process(_delta):
-	if state == State.ORDERED:
+	if state == State.WAITING or state == State.ORDERED:
 		_update_patience_bar()
 
 
@@ -84,6 +94,8 @@ func walk_in(start_global_position: Vector2):
 		return
 	state = State.WAITING
 	_set_bubble_text("...")
+	# patience for taking the order
+	_start_patience(type.wait_patience)
 
 
 func _on_click_area_input_event(_viewport, event, _shape_idx):
@@ -99,6 +111,10 @@ func take_order():
 		return
 	state = State.TALKING
 	bubble.visible = false
+	# remember the waiting bar for the tip, then pause while they talk
+	wait_left = increments_left()
+	patience_timer.stop()
+	patience_bar.visible = false
 
 	var elapsed = 0.0
 	var frame = 0
@@ -110,15 +126,28 @@ func take_order():
 		elapsed += TALK_FRAME_TIME
 
 	sprite.texture = type.neutral_sprite
-	order = GameState.make_order()
+	order = preset_order if preset_order else GameState.make_order()
 	state = State.ORDERED
 	_set_bubble_text(GameState.describe(order))
-	patience_timer.start(type.patience)
+	# new full bar for the drink
+	_start_patience(type.patience)
+
+
+# speed for the tip = average of both bars
+func speed_left() -> float:
+	return (wait_left + increments_left()) / 2.0
+
+
+func _start_patience(seconds: float):
+	current_patience = seconds
+	patience_timer.start(seconds)
 	patience_bar.visible = true
 
 
 func increments_left() -> int:
-	var per_increment = type.patience / GameState.PATIENCE_INCREMENTS
+	if current_patience <= 0:
+		return 0
+	var per_increment = current_patience / GameState.PATIENCE_INCREMENTS
 	return int(ceil(patience_timer.time_left / per_increment))
 
 
@@ -140,9 +169,16 @@ func _update_patience_bar():
 
 func receive_drink(result: Dictionary):
 	patience_timer.stop()
-	var happy = result.mistakes <= 1
-	sprite.texture = type.happy_sprite if happy else type.mad_sprite
-	_show_floating_text("+$%.2f" % snapped(bar.multiplier * result.total, 0.01), Color(0.4, 1, 0.4) if happy else Color(1, 0.85, 0.3))
+	# mood is speed + accuracy together, color matches the patience bar
+	var color = Color(0.4, 1, 0.4)              # green
+	sprite.texture = type.happy_sprite
+	if result.satisfaction < 0.33:
+		color = Color(1, 0.4, 0.4)              # red
+		sprite.texture = type.mad_sprite
+	elif result.satisfaction < 0.66:
+		color = Color(1, 0.85, 0.3)             # yellow
+		sprite.texture = type.neutral_sprite
+	_show_floating_text("+$%.2f\n($%.2f tip)" % [result.total, result.tip], color)
 	leave()
 
 
@@ -166,8 +202,10 @@ func leave():
 	tween.tween_property(self, "position", target, position.distance_to(target) / type.walk_speed)
 	await tween.finished
 
-	if order:
-		order.free()
+	# clean up the order (even if they never got to give it)
+	var o = order if order else preset_order
+	if o:
+		o.free()
 	finished.emit(self)
 	queue_free()
 
@@ -181,7 +219,7 @@ func _set_bubble_text(text: String):
 	await get_tree().process_frame
 	bubble.size = Vector2.ZERO
 	bubble.position.x = -bubble.size.x / 2.0
-	bubble.position.y = -sprite.texture.get_size().y * type.sprite_scale / 2.0 - BUBBLE_GAP - bubble.size.y
+	bubble.position.y = top_y - BUBBLE_GAP - bubble.size.y
 
 
 func _update_bubble():
@@ -201,7 +239,7 @@ func _show_floating_text(text: String, color: Color):
 	label.add_theme_color_override("font_outline_color", Color.BLACK)
 	label.add_theme_constant_override("outline_size", 6)
 	label.add_theme_font_size_override("font_size", 28)
-	label.position = Vector2(-40, -sprite.texture.get_size().y * type.sprite_scale / 2.0)
+	label.position = Vector2(-40, top_y + 40)
 	add_child(label)
 	var tween = label.create_tween().set_parallel(true)
 	tween.tween_property(label, "position:y", label.position.y - 60, 1.2)

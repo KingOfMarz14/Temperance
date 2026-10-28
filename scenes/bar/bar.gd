@@ -8,8 +8,9 @@ const SCREEN_WIDTH = 1152
 # look-down behavior
 const COUNTER_Y_UP = 500.0
 const COUNTER_Y_DOWN = 150.0
-const CUSTOMER_SCALE_DOWN = 0.85
-const CUSTOMER_ALPHA_DOWN = 0.4
+const LOOK_SHIFT = 235.0           # how far everything slides up when you look down
+const CUSTOMER_SCALE_DOWN = 0.95   # tiny shrink so it feels like depth
+const CUSTOMER_DIM_DOWN = 0.85     # customers go a bit out of focus, still visible
 const BACKDROP_DIM_DOWN = 0.7
 const CustomerScript = preload("res://scenes/customers/customer.gd")
 var LOOK_TIME: float = 0.3
@@ -71,10 +72,12 @@ func _move_camera():
 		_apply_look(true, MOVE_TIME)
 
 
-# background and characters shrink toward top center
+# looking down = like tilting your head
+# everything slides up, the counter comes up in front
+# customers peek over the counter (heads and shoulders)
 func _apply_look(animate: bool, duration: float = LOOK_TIME):
 	var s = CUSTOMER_SCALE_DOWN if looking_down else 1.0
-	var alpha = CUSTOMER_ALPHA_DOWN if looking_down else 1.0
+	var shift = Vector2(0, -LOOK_SHIFT) if looking_down else Vector2.ZERO
 	var counter_y = COUNTER_Y_DOWN if looking_down else COUNTER_Y_UP
 	var pivot = Vector2(screen_index * SCREEN_WIDTH + SCREEN_WIDTH / 2.0, 0)
 
@@ -86,11 +89,11 @@ func _apply_look(animate: bool, duration: float = LOOK_TIME):
 		var layer = shrink_layers[i]
 		var parent_offset = (layer.get_parent() as Node2D).position
 		var normal_global = parent_offset + base_positions[i]
-		var new_position = pivot + (normal_global - pivot) * s - parent_offset
-		var tint = Color(1, 1, 1, alpha)
+		var new_position = pivot + (normal_global - pivot) * s - parent_offset + shift
+		var dim = CUSTOMER_DIM_DOWN if looking_down else 1.0
 		if layer == backdrop:
-			var dim = BACKDROP_DIM_DOWN if looking_down else 1.0
-			tint = Color(dim, dim, dim, 1)
+			dim = BACKDROP_DIM_DOWN if looking_down else 1.0
+		var tint = Color(dim, dim, dim, 1)
 		if animate:
 			tween.tween_property(layer, "scale", Vector2.ONE * s, duration)
 			tween.tween_property(layer, "position", new_position, duration)
@@ -270,7 +273,6 @@ func _on_consumables_list_item_clicked(index: int, at_position: Vector2, mouse_b
 		LOOK_TIME = 0.3
 	if index == 1 :
 		multiplier = 2.0
-		current.item = "Elixer of Quality"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 	if index == 2 :
 		multiplier = 1.1

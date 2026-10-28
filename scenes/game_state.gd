@@ -11,8 +11,10 @@ const FIRST_DAY_CUSTOMERS = 5
 const EXTRA_CUSTOMERS_PER_DAY = 1
 const MAX_CUSTOMERS = 100
 const UNOWNED_CHANCE_PER_DAY = 0.02   # doc: X = days * 2%
-# placeholder
-const QUOTA_PER_CUSTOMER = 0.50
+# quota = what you'd make serving every order right with about 3 bars left,
+# times this. lower = easier, 1.0 = basically perfect
+const QUOTA_FRACTION = 0.95
+const QUOTA_SPEED = 3.0
 
 # limits
 const MAX_SPIRITS = 1
@@ -57,8 +59,39 @@ func customers_for_day() -> int:
 	return min(FIRST_DAY_CUSTOMERS + EXTRA_CUSTOMERS_PER_DAY * (day - 1), MAX_CUSTOMERS)
 
 
-func quota_for_day() -> float:
-	return customers_for_day() * QUOTA_PER_CUSTOMER
+# makes the whole day's orders up front so the quota fits them
+func make_day_orders() -> Array:
+	var orders = []
+	for i in customers_for_day():
+		orders.append(make_order())
+	return orders
+
+
+func quota_for(orders: Array) -> float:
+	var total = 0.0
+	for order in orders:
+		total += best_value(order)
+	return snapped(total * QUOTA_FRACTION, 0.01)
+
+
+# most you could make on this order with what you own rn
+func best_value(order: Drink) -> float:
+	var best = Drink.new()
+	best.glass = order.glass
+	best.ice = order.ice
+	best.shaken = order.shaken
+	best.stirred = order.stirred
+	best.set_spirit(_if_owned(order.spirit[0], owned_spirits), _if_owned(order.spirit[1], owned_spirits))
+	best.set_mix(_if_owned(order.mix[0], owned_mixins), _if_owned(order.mix[1], owned_mixins),
+		_if_owned(order.mix[2], owned_mixins))
+	best.set_garnish(_if_owned(order.garnish[0], owned_garnishes), _if_owned(order.garnish[1], owned_garnishes))
+	var value = score(order, best, QUOTA_SPEED).total
+	best.free()
+	return value
+
+
+func _if_owned(item, owned: Array):
+	return item if owned.has(item) else null
 
 
 # ORDERING
@@ -74,7 +107,9 @@ func make_order() -> Drink:
 		# 2: straight-up (neither)
 
 	var spirits = _pick_some(owned_spirits, ALL_SPIRITS, 1, MAX_SPIRITS)
-	var mixins = _pick_some(owned_mixins, ALL_MIXINS, 0, MAX_MIXINS)
+	# shaken always needs a spirit and a mix-in
+	var min_mixins = 1 if order.shaken else 0
+	var mixins = _pick_some(owned_mixins, ALL_MIXINS, min_mixins, MAX_MIXINS)
 	var garnishes = _pick_some(owned_garnishes, ALL_GARNISHES, 0, MAX_GARNISHES)
 	order.set_spirit(_slot(spirits, 0), _slot(spirits, 1))
 	order.set_mix(_slot(mixins, 0), _slot(mixins, 1), _slot(mixins, 2))
@@ -106,12 +141,13 @@ func _slot(items: Array, index: int):
 # order is lines of text for now
 func describe(order: Drink) -> String:
 	var lines = [order.glass]
-	var method = "straight-up"
+	var ice_line = "On the rocks" if order.ice else "No ice"
+	# nothing listed = not shaken or stirred
 	if order.shaken:
-		method = "shaken"
+		ice_line += ", shaken"
 	elif order.stirred:
-		method = "stirred"
-	lines.append(("On the rocks, " if order.ice else "No ice, ") + method)
+		ice_line += ", stirred"
+	lines.append(ice_line)
 	for list in [order.spirit, order.mix, order.garnish]:
 		var names = list.filter(func(x): return x != null)
 		if not names.is_empty():
@@ -122,7 +158,7 @@ func describe(order: Drink) -> String:
 # SCORING
 
 # compares what player chooses, notes what it means (score, money, etc)
-func score(order: Drink, made: Drink, increments_left: int) -> Dictionary:
+func score(order: Drink, made: Drink, increments_left: float) -> Dictionary:
 	var correct = 0
 	var mistakes = 0
 
@@ -150,5 +186,10 @@ func score(order: Drink, made: Drink, increments_left: int) -> Dictionary:
 		mistakes += remaining.size()  # something they asked for but didn't get
 
 	var tip = correct * CORRECT_ITEM_TIP + increments_left * SPEED_TIP
+	# how happy they are (0 to 1): accuracy matters most, speed adds on top
+	# a wrong drink fast is still bad, a right drink slow is just ok
+	var accuracy = float(correct) / max(correct + mistakes, 1)
+	var speed = float(increments_left) / PATIENCE_INCREMENTS
+	var satisfaction = accuracy * (0.5 + 0.5 * speed)
 	return {"pay": pay, "tip": tip, "total": pay + tip,
-		"correct": correct, "mistakes": mistakes}
+		"correct": correct, "mistakes": mistakes, "satisfaction": satisfaction}
