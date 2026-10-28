@@ -1,4 +1,6 @@
+class_name bar
 extends Node2D
+
 
 # size of one screen
 const SCREEN_WIDTH = 1152
@@ -10,15 +12,17 @@ const LOOK_SHIFT = 235.0           # how far everything slides up when you look 
 const CUSTOMER_SCALE_DOWN = 0.95   # tiny shrink so it feels like depth
 const CUSTOMER_DIM_DOWN = 0.85     # customers go a bit out of focus, still visible
 const BACKDROP_DIM_DOWN = 0.7
-const LOOK_TIME = 0.3
-const MOVE_TIME = 0.25
+const CustomerScript = preload("res://scenes/customers/customer.gd")
+var LOOK_TIME: float = 0.3
+var MOVE_TIME: float = 0.25
 
 var screen_index := 0     # 0 = The Library, 1 = The Toolkit
 var looking_down := false
-var current 
+var current
 var barmatdrink1
 var barmatdrink2
 var barmat: Array[Drink] = [barmatdrink1, barmatdrink2]
+static var multiplier: float = 1.0
 
 @onready var camera: Camera2D = $Camera2D
 @onready var screens = [$LibraryScreen, $ToolkitScreen]
@@ -42,6 +46,7 @@ func _ready():
 	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.hide()
 	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1.hide()
 	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2.hide()
+	$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("move_left") and screen_index > 0:
@@ -138,6 +143,10 @@ func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_
 		$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 		return
 
+	var basic_quality = [0, 1, 2, 9, 10, 11, 12]
+	var herbal_quality = [7, 8]
+	var exotic_quality = [4, 6, 13]
+	var unusual_quality = [14, 15, 16, 17]
 	if (current._mix[0] == null):
 		current._mix[0] = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
 	elif (current._mix[1] == null):
@@ -145,6 +154,30 @@ func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_
 	elif (current._mix[2] == null):
 		current._mix[2] = $"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".get_item_text(index)
 	
+	if (current._quality[0] == null):
+		if (basic_quality.has(index)) :
+			current._quality[0] = "basic"
+	else :
+		current._quality[1] = "basic"
+		
+	if (current._quality[0] == null):
+		if (herbal_quality.has(index)) :
+			current._quality[0] = "herbal"
+	else :
+		current._quality[1] = "herbal"
+		
+	if (current._quality[0] == null):
+		if (exotic_quality.has(index)) :
+			current._quality[0] = "exotic"
+	else :
+		current._quality[1] = "exotic"
+	
+	if (current._quality[0] == null):
+		if (unusual_quality.has(index)) :
+			current._quality[0] = "unusual"
+	else :
+		current._quality[1] = "unusual"
+		
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 
 
@@ -228,3 +261,56 @@ func _on_bar_mat_drink_2_pressed() -> void:
 	current = temp
 	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1.hide()
 	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2.hide()
+
+
+func _on_consumables_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
+	if index == 0 :
+		MOVE_TIME = 0
+		LOOK_TIME = 0
+		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
+		await get_tree().create_timer(10).timeout
+		MOVE_TIME = 0.25
+		LOOK_TIME = 0.3
+	if index == 1 :
+		multiplier = 2.0
+		current._item = "Elixer of Quality"
+		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
+	if index == 2 :
+		multiplier = 1.1
+		current._item += "Talis. Of The Exotics"
+		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
+		await get_tree().create_timer(15).timeout
+		current._item = ""
+		multiplier = 1
+	if index == 3 :
+		multiplier = 1.1
+		current._item += "Talis. Of The Unnatural"
+		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
+		await get_tree().create_timer(15).timeout
+		current._item = ""
+		multiplier = 1
+	if index == 4 :
+		multiplier = 1.1
+		current._item += "Talis. of The Basic"
+		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
+		await get_tree().create_timer(15).timeout
+		current._item = ""
+		multiplier = 1
+	if index == 5 :
+		multiplier = 1.1
+		current._item += "Talis. of Herbal"
+		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
+		await get_tree().create_timer(15).timeout
+		current._item = ""
+		multiplier = 1
+	#if index == 6 :
+		#
+		#$CustomerManager.spawn_delay_min = 999
+		#$CustomerManager.spawn_delay_max = 1000
+		#await get_tree().create_timer(10).timeout
+		#$CustomerManager.spawn_delay_min = 25
+		#$CustomerManager.spawn_delay_max = 40
+
+
+func _on_consumables_pressed() -> void:
+	$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.show()

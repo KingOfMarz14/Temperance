@@ -205,13 +205,27 @@ offset_right = 523.0
 offset_bottom = 482.0
 text = "Ice"
 
-[node name="non-alcohol" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1969059944]
+[node name="consumables" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1969059944]
 layout_mode = 0
 offset_left = 532.0
 offset_top = 9.0
 offset_right = 705.0
 offset_bottom = 482.0
 text = "Consumables"
+
+[node name="consumables_list" type="ItemList" parent="ToolkitScreen/CounterLayer/Counter/consumables" unique_id=83834285]
+layout_mode = 0
+offset_right = 175.0
+offset_bottom = 474.0
+item_count = 8
+item_0/text = "Teleportation Serum"
+item_1/text = "Elixer of Quality"
+item_2/text = "Talis. Of The Exotics"
+item_3/text = "Talis. Of The Unnatural"
+item_4/text = "Talis. of The Basic"
+item_5/text = "Talis. of Herbal"
+item_6/text = "Liquid Time-Stop"
+item_7/text = "Elixer of Illusion"
 
 [node name="glasses_menu" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=2071397736]
 layout_mode = 0
@@ -254,5 +268,7 @@ Purifier"
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2" to="." method="_on_bar_mat_drink_2_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/trash" to="." method="_on_trash_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/ice" to="." method="_on_ice_pressed"]
+[connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/consumables" to="." method="_on_consumables_pressed"]
+[connection signal="item_clicked" from="ToolkitScreen/CounterLayer/Counter/consumables/consumables_list" to="." method="_on_consumables_list_item_clicked"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/glasses_menu" to="." method="_on_glasses_menu_pressed"]
 [connection signal="item_clicked" from="ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list" to="." method="_on_glasses_list_item_clicked"]

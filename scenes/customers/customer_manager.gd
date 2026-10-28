@@ -128,11 +128,28 @@ func _on_customer_clicked(customer):
 func _serve(customer):
 	var drink: Drink = bar.current
 	var result = GameState.score(customer.order, drink, customer.speed_left())
+	if (bar.current._item == "Talis. Of The Exotics" && bar.current._quality.has("exotic")):
+		bar.multiplier = 1.1
+	if (bar.current._item == "Talis. Of The Unnatural" && bar.current._quality.has("unusual")):
+		bar.multiplier = 1.1
+	if (bar.current._item == "Talis. of The Basic" && bar.current._quality.has("basic")):
+		bar.multiplier = 1.1
+	if (bar.current._item == "Talis. of Herbal" && bar.current._quality.has("herbal")):
+		bar.multiplier = 1.1
+	if (bar.current._item == "Elixer of Quality"):
+		bar.multiplier = 1
+		
+	# talismans bump up the total
+	result.total = snapped(bar.multiplier * result.total, 0.01)
 	bar.current = null       # the drink is handed over
 	drink.free()
+		
 	GameState.money += result.total
 	day_earnings += result.total
 	customer.receive_drink(result)
+	
+	
+	
 	_update_hud()
 
 
@@ -160,6 +177,7 @@ func _end_day():
 		day_over_label.text = "Day %d complete!\nYou made $%.2f (quota $%.2f)" % [GameState.day, day_earnings, quota]
 		day_over_button.text = "Next day"
 	else:
+		$HUD/DayOver/Panel/VBox/Shop.hide()
 		day_over_label.text = "Closed down...\nYou made $%.2f but needed $%.2f" % [day_earnings, quota]
 		day_over_button.text = "Back to main menu"
 	day_over_panel.visible = true

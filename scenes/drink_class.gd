@@ -5,10 +5,11 @@ var _glass = null
 var _spirit = [null, null]
 var _mix = [null, null, null]
 var _garnish = [null, null]
-var _quality = null
+var _quality = [null, null]
 var _ice = false
 var _shaken = false
 var _stirred = false
+var _item: String = ""
 
 func _init() -> void:
 	self.glass = null;
@@ -68,3 +69,9 @@ var stirred:
 		return _stirred;
 	set(value):
 		_stirred = value;
+		
+var item:
+	get:
+		return _item;
+	set(x):
+		_item = x;
