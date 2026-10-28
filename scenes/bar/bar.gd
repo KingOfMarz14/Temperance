@@ -270,35 +270,35 @@ func _on_consumables_list_item_clicked(index: int, at_position: Vector2, mouse_b
 		LOOK_TIME = 0.3
 	if index == 1 :
 		multiplier = 2.0
-		current.item = "Elixer of Quality"
+		current._item = "Elixer of Quality"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 	if index == 2 :
 		multiplier = 1.1
-		current.item += "Talis. Of The Exotics"
+		current._item += "Talis. Of The Exotics"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 		await get_tree().create_timer(15).timeout
-		current.item = ""
+		current._item = ""
 		multiplier = 1
 	if index == 3 :
 		multiplier = 1.1
-		current.item += "Talis. Of The Unnatural"
+		current._item += "Talis. Of The Unnatural"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 		await get_tree().create_timer(15).timeout
-		current.item = ""
+		current._item = ""
 		multiplier = 1
 	if index == 4 :
 		multiplier = 1.1
-		current.item += "Talis. of The Basic"
+		current._item += "Talis. of The Basic"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 		await get_tree().create_timer(15).timeout
-		current.item = ""
+		current._item = ""
 		multiplier = 1
 	if index == 5 :
 		multiplier = 1.1
-		current.item += "Talis. of Herbal"
+		current._item += "Talis. of Herbal"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 		await get_tree().create_timer(15).timeout
-		current.item = ""
+		current._item = ""
 		multiplier = 1
 	#if index == 6 :
 		#
