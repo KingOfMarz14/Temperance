@@ -142,7 +142,7 @@ func receive_drink(result: Dictionary):
 	patience_timer.stop()
 	var happy = result.mistakes <= 1
 	sprite.texture = type.happy_sprite if happy else type.mad_sprite
-	_show_floating_text("+$%.2f" % result.total, Color(0.4, 1, 0.4) if happy else Color(1, 0.85, 0.3))
+	_show_floating_text("+$%.2f" % snapped(bar.multiplier * result.total, 0.01), Color(0.4, 1, 0.4) if happy else Color(1, 0.85, 0.3))
 	leave()
 
 
