@@ -273,7 +273,6 @@ func _on_consumables_list_item_clicked(index: int, at_position: Vector2, mouse_b
 		LOOK_TIME = 0.3
 	if index == 1 :
 		multiplier = 2.0
-		current.item = "Elixer of Quality"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 	if index == 2 :
 		multiplier = 1.1

@@ -136,16 +136,20 @@ func _serve(customer):
 		bar.multiplier = 1.1
 	if (bar.current._item == "Talis. of Herbal" && bar.current._quality.has("herbal")):
 		bar.multiplier = 1.1
-	if (bar.current._item == "Elixer of Quality"):
-		bar.multiplier = 1
+	
 		
 	# talismans bump up the total
 	result.total = snapped(bar.multiplier * result.total, 0.01)
 	bar.current = null       # the drink is handed over
 	drink.free()
 		
+	if (bar.multiplier > 1):
+		bar.multiplier = 1
+	GameState.money += snapped(bar.multiplier * result.total, 0.01)
+	day_earnings += snapped(bar.multiplier * result.total, 0.01)
 	GameState.money += result.total
 	day_earnings += result.total
+
 	customer.receive_drink(result)
 	
 	
