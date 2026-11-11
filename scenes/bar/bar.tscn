@@ -274,6 +274,7 @@ layout_mode = 0
 offset_right = 215.0
 offset_bottom = 422.0
 item_count = 5
+item_0/text = "Rocks Glass"
 item_1/text = "Cocktail Glass"
 item_2/text = "Coupe Glass"
 item_3/text = "Liqueur Glass"

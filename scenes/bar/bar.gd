@@ -385,18 +385,21 @@ func _on_purifier_2_pressed() -> void:
 		return
 	if finished_p2:
 		if current == null:
-			current = purifier[1]
-			purifier[1] = null
+			current = purifier[0]
+			purifier[0] = null
 			finished_p2 = false
-	else:
-		$CustomerManager._flash_message("Hands full, put drink down first")
+			$CustomerManager._flash_message("Purified drink has been picked up")
+			return
+		else:
+			$CustomerManager._flash_message("Hands full, put drink down first")
+			return
 		
 	if current == null or current.mix[0] == null or current.spirit[0] == null:
 		$CustomerManager._flash_message("Nothing to purify")
 		return
 	
 	var temp = current
-	purifier[1] = temp
+	purifier[0] = temp
 	current = null
 	waiting_p2 = true
 	$CustomerManager._flash_message("Current drink being purified, please wait")
@@ -414,18 +417,21 @@ func _on_purifier_3_pressed() -> void:
 		return
 	if finished_p3:
 		if current == null:
-			current = purifier[2]
-			purifier[2] = null
+			current = purifier[0]
+			purifier[0] = null
 			finished_p3 = false
-	else:
-		$CustomerManager._flash_message("Hands full, put drink down first")
+			$CustomerManager._flash_message("Purified drink has been picked up")
+			return
+		else:
+			$CustomerManager._flash_message("Hands full, put drink down first")
+			return
 		
 	if current == null or current.mix[0] == null or current.spirit[0] == null:
 		$CustomerManager._flash_message("Nothing to purify")
 		return
 	
 	var temp = current
-	purifier[2] = temp
+	purifier[0] = temp
 	current = null
 	waiting_p3 = true
 	$CustomerManager._flash_message("Current drink being purified, please wait")

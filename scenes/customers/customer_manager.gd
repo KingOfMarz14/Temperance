@@ -145,8 +145,6 @@ func _serve(customer):
 		
 	if (bar.multiplier > 1):
 		bar.multiplier = 1
-	GameState.money += snapped(bar.multiplier * result.total, 0.01)
-	day_earnings += snapped(bar.multiplier * result.total, 0.01)
 	GameState.money += result.total
 	day_earnings += result.total
 
