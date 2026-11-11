@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://bcp2w71uw57yc"]
 
-[ext_resource type="Texture2D" uid="uid://bxa8ovkvr54vm" path="res://sprites/mothmanHappy0.png" id="1_eas7q"]
-[ext_resource type="Texture2D" uid="uid://bef2erwghkfk2" path="res://sprites/mothmanHappy1.png" id="2_0rcyg"]
-[ext_resource type="Texture2D" uid="uid://ca58cx51pcdj3" path="res://sprites/mothmanMad0.png" id="3_frhio"]
-[ext_resource type="Texture2D" uid="uid://clapnml8w4kqt" path="res://sprites/mothmanMad1.png" id="4_551dw"]
-[ext_resource type="Texture2D" uid="uid://cjmjc6xefylb7" path="res://sprites/mothmanNeutral0.png" id="5_sll7s"]
-[ext_resource type="Texture2D" uid="uid://dlnebddd1k6sx" path="res://sprites/mothmanNeutral1.png" id="6_crw8f"]
+[ext_resource type="Texture2D" uid="uid://bxa8ovkvr54vm" path="res://sprites/Character_Sprites/mothmanHappy0.png" id="1_eas7q"]
+[ext_resource type="Texture2D" uid="uid://bef2erwghkfk2" path="res://sprites/Character_Sprites/mothmanHappy1.png" id="2_0rcyg"]
+[ext_resource type="Texture2D" uid="uid://ca58cx51pcdj3" path="res://sprites/Character_Sprites/mothmanMad0.png" id="3_frhio"]
+[ext_resource type="Texture2D" uid="uid://clapnml8w4kqt" path="res://sprites/Character_Sprites/mothmanMad1.png" id="4_551dw"]
+[ext_resource type="Texture2D" uid="uid://cjmjc6xefylb7" path="res://sprites/Character_Sprites/mothmanNeutral0.png" id="5_sll7s"]
+[ext_resource type="Texture2D" uid="uid://dlnebddd1k6sx" path="res://sprites/Character_Sprites/mothmanNeutral1.png" id="6_crw8f"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_78bur"]
 animations = [{

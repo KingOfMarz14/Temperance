@@ -10,6 +10,7 @@ var _ice = false
 var _shaken = false
 var _stirred = false
 var _item: String = ""
+var _purify = false
 
 func _init() -> void:
 	self.glass = null;
@@ -75,3 +76,9 @@ var item:
 		return _item;
 	set(x):
 		_item = x;
+
+var purify:
+	get:
+		return _purify;
+	set(x):
+		_purify = x;

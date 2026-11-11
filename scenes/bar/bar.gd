@@ -22,7 +22,17 @@ var current
 var barmatdrink1
 var barmatdrink2
 var barmat: Array[Drink] = [barmatdrink1, barmatdrink2]
+var purifydrink1
+var purifydrink2
+var purifydrink3
+var purifier: Array[Drink] = [purifydrink1, purifydrink2, purifydrink3]
 static var multiplier: float = 1.0
+var waiting_p1 = false
+var finished_p1 = false
+var waiting_p2 = false
+var finished_p2 = false
+var waiting_p3 = false
+var finished_p3 = false
 
 @onready var camera: Camera2D = $Camera2D
 @onready var screens = [$LibraryScreen, $ToolkitScreen]
@@ -112,14 +122,20 @@ func _apply_look(animate: bool, duration: float = LOOK_TIME):
 
 func _on_spirit_menu_pressed() -> void:
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.show()
+	$"LibraryScreen/CounterLayer/Counter/mix-in_menu".hide()
+	$LibraryScreen/CounterLayer/Counter/garnish_menu.hide()
 	
 
 func _on_mixin_menu_pressed() -> void:
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".show()
+	$LibraryScreen/CounterLayer/Counter/spirit_menu.hide()
+	$LibraryScreen/CounterLayer/Counter/garnish_menu.hide()
 
 
 func _on_garnish_menu_pressed() -> void:
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.show()
+	$LibraryScreen/CounterLayer/Counter/spirit_menu.hide()
+	$"LibraryScreen/CounterLayer/Counter/mix-in_menu".hide()
 
 func _on_glasses_menu_pressed() -> void:
 	$ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list.show()
@@ -127,20 +143,26 @@ func _on_glasses_menu_pressed() -> void:
 func _on_spirits_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
 	if no_glass():
 		$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
+		$"LibraryScreen/CounterLayer/Counter/mix-in_menu".show()
+		$LibraryScreen/CounterLayer/Counter/garnish_menu.show()
 		return
-	
+
 	if (current._spirit[0] == null):
 		current._spirit[0] = $LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.get_item_text(index)
 	elif (current._spirit[1] == null):
 		current._spirit[1] = $LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.get_item_text(index)
 	
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
+	$"LibraryScreen/CounterLayer/Counter/mix-in_menu".show()
+	$LibraryScreen/CounterLayer/Counter/garnish_menu.show()
 	
 
 
 func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
 	if no_glass():
 		$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
+		$LibraryScreen/CounterLayer/Counter/spirit_menu.show()
+		$LibraryScreen/CounterLayer/Counter/garnish_menu.show()
 		return
 
 	var basic_quality = [0, 1, 2, 9, 10, 11, 12]
@@ -179,11 +201,15 @@ func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_
 		current._quality[1] = "unusual"
 		
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
+	$LibraryScreen/CounterLayer/Counter/spirit_menu.show()
+	$LibraryScreen/CounterLayer/Counter/garnish_menu.show()
 
 
 func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
 	if no_glass():
 		$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
+		$LibraryScreen/CounterLayer/Counter/spirit_menu.show()
+		$"LibraryScreen/CounterLayer/Counter/mix-in_menu".show()
 		return
 	
 	if (current._garnish[0] == null):
@@ -192,6 +218,8 @@ func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_butto
 		current._garnish[1] = $LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.get_item_text(index)
 	
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
+	$LibraryScreen/CounterLayer/Counter/spirit_menu.show()
+	$"LibraryScreen/CounterLayer/Counter/mix-in_menu".show()
 
 
 func _on_glasses_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
@@ -276,24 +304,32 @@ func _on_consumables_list_item_clicked(index: int, at_position: Vector2, mouse_b
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 	if index == 2 :
 		multiplier = 1.1
+		if current == null:
+			current = Drink.new()
 		current.item += "Talis. Of The Exotics"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 		await get_tree().create_timer(15).timeout
 		multiplier = 1
 	if index == 3 :
 		multiplier = 1.1
+		if current == null:
+			current = Drink.new()
 		current.item += "Talis. Of The Unnatural"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 		await get_tree().create_timer(15).timeout
 		multiplier = 1
 	if index == 4 :
 		multiplier = 1.1
+		if current == null:
+			current = Drink.new()
 		current.item += "Talis. of The Basic"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 		await get_tree().create_timer(15).timeout
 		multiplier = 1
 	if index == 5 :
 		multiplier = 1.1
+		if current == null:
+			current = Drink.new()
 		current.item += "Talis. of Herbal"
 		$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
 		await get_tree().create_timer(15).timeout
@@ -309,3 +345,102 @@ func _on_consumables_list_item_clicked(index: int, at_position: Vector2, mouse_b
 
 func _on_consumables_pressed() -> void:
 	$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.show()
+
+
+func _on_purifier_1_pressed() -> void:
+	if waiting_p1:
+		$CustomerManager._flash_message("Purifier currently being used")
+		return
+	if finished_p1:
+		if current == null:
+			current = purifier[0]
+			purifier[0] = null
+			finished_p1 = false
+			$CustomerManager._flash_message("Purified drink has been picked up")
+			return
+		else:
+			$CustomerManager._flash_message("Hands full, put drink down first")
+			return
+		
+	if current == null or current.mix[0] == null or current.spirit[0] == null:
+		$CustomerManager._flash_message("Nothing to purify")
+		return
+	
+	var temp = current
+	purifier[0] = temp
+	current = null
+	waiting_p1 = true
+	$CustomerManager._flash_message("Current drink being purified, please wait")
+	await get_tree().create_timer(15).timeout
+	
+	temp.purify = true
+	waiting_p1 = false
+	finished_p1 = true
+	$CustomerManager._flash_message("Drink has been purified")
+
+
+func _on_purifier_2_pressed() -> void:
+	if waiting_p2:
+		$CustomerManager._flash_message("Purifier currently being used")
+		return
+	if finished_p2:
+		if current == null:
+			current = purifier[1]
+			purifier[1] = null
+			finished_p2 = false
+	else:
+		$CustomerManager._flash_message("Hands full, put drink down first")
+		
+	if current == null or current.mix[0] == null or current.spirit[0] == null:
+		$CustomerManager._flash_message("Nothing to purify")
+		return
+	
+	var temp = current
+	purifier[1] = temp
+	current = null
+	waiting_p2 = true
+	$CustomerManager._flash_message("Current drink being purified, please wait")
+	await get_tree().create_timer(15).timeout
+	
+	temp.purify = true
+	waiting_p2 = false
+	finished_p2 = true
+	$CustomerManager._flash_message("Drink has been purified")
+
+
+func _on_purifier_3_pressed() -> void:
+	if waiting_p3:
+		$CustomerManager._flash_message("Purifier currently being used")
+		return
+	if finished_p3:
+		if current == null:
+			current = purifier[2]
+			purifier[2] = null
+			finished_p3 = false
+	else:
+		$CustomerManager._flash_message("Hands full, put drink down first")
+		
+	if current == null or current.mix[0] == null or current.spirit[0] == null:
+		$CustomerManager._flash_message("Nothing to purify")
+		return
+	
+	var temp = current
+	purifier[2] = temp
+	current = null
+	waiting_p3 = true
+	$CustomerManager._flash_message("Current drink being purified, please wait")
+	await get_tree().create_timer(15).timeout
+	
+	temp.purify = true
+	waiting_p3 = false
+	finished_p3 = true
+	$CustomerManager._flash_message("Drink has been purified")
+
+
+func _on_shaker_pressed() -> void:
+	if no_glass():
+		return
+	if current.mix[0] != null && current.spirit[0] != null:
+		current._shaken = true
+	else:
+		$CustomerManager._flash_message("Nothing to shake right now")

@@ -1,10 +1,28 @@
 [gd_scene format=3 uid="uid://c7fwmq2dwy4mb"]
 
 [ext_resource type="Script" uid="uid://degefku1e4k7j" path="res://scenes/bar/bar.gd" id="1_wj5ec"]
+[ext_resource type="Texture2D" uid="uid://bkvb8kruoupx" path="res://sprites/Menu_Icon_Sprites/REUPLOADED_SPIRITS_MENU_Wrk.png" id="2_53nt1"]
 [ext_resource type="PackedScene" uid="uid://dlkabgak7fxgg" path="res://scenes/customers/customer_manager.tscn" id="2_cmgr"]
 [ext_resource type="Script" uid="uid://t2sj5odpfh8l" path="res://scenes/bar/spirit_menu.gd" id="3_tcu61"]
+[ext_resource type="Texture2D" uid="uid://bx4imltqchp3o" path="res://sprites/Spirit_Sprites/REUPLOADED_GIN_Wrk.png" id="3_vkkt2"]
 [ext_resource type="Script" uid="uid://bgxy0nh8x7xw2" path="res://scenes/bar/spirits_list.gd" id="4_4ex4t"]
+[ext_resource type="Texture2D" uid="uid://q0qrrt30c3qf" path="res://sprites/Spirit_Sprites/REUPLOADED_WHISKY_Wrk.png" id="4_tmrft"]
+[ext_resource type="Texture2D" uid="uid://cqbwq4v5vf8jh" path="res://sprites/Spirit_Sprites/REUPLOADED_RUM_Wrk.png" id="5_fdyug"]
 [ext_resource type="Script" uid="uid://bkoemsxj2a5pq" path="res://scenes/bar/mix_in_list.gd" id="5_uolcu"]
+[ext_resource type="Texture2D" uid="uid://86nams3st5bs" path="res://sprites/Mixin_Sprites/REUPLOADED_LEMONJUICE_Wrk.png" id="7_gq2kc"]
+[ext_resource type="Texture2D" uid="uid://c1cg0yos31nty" path="res://sprites/Menu_Icon_Sprites/REUPLOADED_MIXINS_MENU_Wrk.png" id="8_1nr5c"]
+[ext_resource type="Texture2D" uid="uid://dgccfsypteufq" path="res://sprites/Mixin_Sprites/REUPLOADED_HONEY_Wrk.png" id="8_76tu6"]
+[ext_resource type="Texture2D" uid="uid://c813hlsxsb3oi" path="res://sprites/Mixin_Sprites/REUPLOADED_GRENADINE_Wrk.png" id="9_5d5an"]
+[ext_resource type="Texture2D" uid="uid://bmson5pspbcil" path="res://sprites/Garnish_Sprites/REUPLOADED_LEMONTWIST_Wrk.png" id="11_6fd3g"]
+[ext_resource type="Texture2D" uid="uid://cisfje1wwy1ta" path="res://sprites/Garnish_Sprites/REUPLOADED_CHERRY_Wrk.png" id="12_53nt1"]
+[ext_resource type="Texture2D" uid="uid://bxjb58bugvad1" path="res://sprites/Menu_Icon_Sprites/REUPLOADED_GARNISHES_MENU_Wrk.png" id="13_kd8aa"]
+[ext_resource type="Texture2D" uid="uid://b0xwhjuh1lanq" path="res://sprites/Garnish_Sprites/REUPLOADED_MINT_Wrk.png" id="13_ndwor"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3gxfx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kd8aa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wvxlp"]
 
 [node name="Bar" type="Node2D" unique_id=1433516175]
 script = ExtResource("1_wj5ec")
@@ -55,21 +73,27 @@ color = Color(0.7186083, 0.59331846, 0.9240934, 1)
 [node name="spirit_menu" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=239660253]
 layout_mode = 0
 offset_left = 62.0
-offset_top = 46.0
-offset_right = 301.0
-offset_bottom = 200.0
-text = "Spirit Menu"
+offset_top = 40.0
+offset_right = 319.0
+offset_bottom = 234.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3gxfx")
+icon = ExtResource("2_53nt1")
 script = ExtResource("3_tcu61")
 
 [node name="spirits_list" type="ItemList" parent="LibraryScreen/CounterLayer/Counter/spirit_menu" unique_id=519048977]
 layout_mode = 0
-offset_top = -10.0
-offset_right = 270.0
-offset_bottom = 441.0
+offset_left = 182.0
+offset_top = -78.0
+offset_right = 837.0
+offset_bottom = 297.0
 item_count = 6
-item_0/text = "Gin"
-item_1/text = "Whiskey"
-item_2/text = "Rum"
+max_columns = 3
+item_0/text = "                                            "
+item_0/icon = ExtResource("3_vkkt2")
+item_1/text = "                                            "
+item_1/icon = ExtResource("4_tmrft")
+item_2/text = "         "
+item_2/icon = ExtResource("5_fdyug")
 item_3/text = "Brandy"
 item_4/text = "Moonshine"
 item_5/text = "Scotch"
@@ -78,20 +102,25 @@ script = ExtResource("4_4ex4t")
 [node name="mix-in_menu" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=1314829062]
 layout_mode = 0
 offset_left = 335.0
-offset_top = 44.0
-offset_right = 576.0
-offset_bottom = 482.0
-text = "Mix-in Menu"
+offset_top = 40.0
+offset_right = 587.0
+offset_bottom = 548.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kd8aa")
+icon = ExtResource("8_1nr5c")
 
 [node name="mix-in_list" type="ItemList" parent="LibraryScreen/CounterLayer/Counter/mix-in_menu" unique_id=1073717689]
 layout_mode = 0
-offset_top = -9.0
-offset_right = 263.0
-offset_bottom = 443.0
+offset_left = -90.0
+offset_top = -77.0
+offset_right = 565.0
+offset_bottom = 298.0
 item_count = 12
-item_0/text = "Lemon Juice"
-item_1/text = "Honey"
-item_2/text = "Grenadine"
+max_columns = 3
+item_0/text = "                                            "
+item_0/icon = ExtResource("7_gq2kc")
+item_1/text = "                                         "
+item_1/icon = ExtResource("8_76tu6")
+item_2/icon = ExtResource("9_5d5an")
 item_3/text = "Maraschino Liquer"
 item_4/text = "Pineapple Juice"
 item_5/text = "Sweet Vermouth"
@@ -105,29 +134,33 @@ script = ExtResource("5_uolcu")
 
 [node name="garnish_menu" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=632430372]
 layout_mode = 0
-offset_left = 605.0
+offset_left = 590.0
 offset_top = 40.0
-offset_right = 830.0
-offset_bottom = 301.0
-text = "Garnish Menu"
+offset_right = 875.0
+offset_bottom = 548.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_wvxlp")
+icon = ExtResource("13_kd8aa")
 
 [node name="garnish_list" type="ItemList" parent="LibraryScreen/CounterLayer/Counter/garnish_menu" unique_id=1226087602]
 layout_mode = 0
-offset_right = 272.0
-offset_bottom = 440.0
+offset_left = -348.0
+offset_top = -79.0
+offset_right = 307.0
+offset_bottom = 296.0
 item_count = 6
-item_0/text = "Lemon Twist"
+max_columns = 3
+item_0/icon = ExtResource("11_6fd3g")
 item_1/text = "Orange Twist"
-item_2/text = "Cherries"
-item_3/text = "Mint"
+item_2/icon = ExtResource("12_53nt1")
+item_3/icon = ExtResource("13_ndwor")
 item_4/text = "Lemon Slice"
 item_5/text = "Orange Slice"
 
 [node name="mixer" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=676957543]
 layout_mode = 0
-offset_left = 98.0
+offset_left = 171.0
 offset_top = 379.0
-offset_right = 258.0
+offset_right = 331.0
 offset_bottom = 478.0
 text = "Mixer"
 
@@ -155,12 +188,13 @@ text = "Drink 2"
 
 [node name="shaker" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=1834950838]
 layout_mode = 0
-offset_left = 96.0
-offset_top = 249.0
-offset_right = 256.0
-offset_bottom = 348.0
+offset_left = 4.0
+offset_top = 379.0
+offset_right = 170.0
+offset_bottom = 478.0
 text = "Shaker
 "
+icon_alignment = 1
 
 [node name="ToolkitScreen" type="Node2D" parent="." unique_id=420253463]
 position = Vector2(1152, 0)
@@ -191,18 +225,18 @@ color = Color(0.86642814, 0.59456724, 0.61878717, 1)
 [node name="trash" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=149277607]
 layout_mode = 0
 offset_left = 22.0
-offset_top = 8.0
-offset_right = 526.0
-offset_bottom = 305.0
+offset_top = 110.0
+offset_right = 262.0
+offset_bottom = 410.0
 text = "Trash
 "
 
 [node name="ice" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1216273017]
 layout_mode = 0
-offset_left = 22.0
-offset_top = 317.0
-offset_right = 523.0
-offset_bottom = 482.0
+offset_left = 278.0
+offset_top = 110.0
+offset_right = 518.0
+offset_bottom = 411.0
 text = "Ice"
 
 [node name="consumables" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1969059944]
@@ -230,9 +264,9 @@ item_7/text = "Elixer of Illusion"
 [node name="glasses_menu" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=2071397736]
 layout_mode = 0
 offset_left = 926.0
-offset_top = 60.0
+offset_top = 58.0
 offset_right = 1139.0
-offset_bottom = 481.0
+offset_bottom = 482.0
 text = "Glasses"
 
 [node name="glasses_list" type="ItemList" parent="ToolkitScreen/CounterLayer/Counter/glasses_menu" unique_id=1987495431]
@@ -240,20 +274,34 @@ layout_mode = 0
 offset_right = 215.0
 offset_bottom = 422.0
 item_count = 5
-item_0/text = "Rocks Glass"
 item_1/text = "Cocktail Glass"
 item_2/text = "Coupe Glass"
 item_3/text = "Liqueur Glass"
 item_4/text = "Zombie Glass"
 
-[node name="bar_mat" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1404427508]
+[node name="purifier1" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1404427508]
 layout_mode = 0
 offset_left = 709.0
 offset_top = 58.0
 offset_right = 923.0
-offset_bottom = 482.0
-text = "Bar Mat (up to 2) or 
-Purifier"
+offset_bottom = 199.0
+text = "Purifier"
+
+[node name="purifier2" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=642529468]
+layout_mode = 0
+offset_left = 709.0
+offset_top = 199.0
+offset_right = 923.0
+offset_bottom = 340.0
+text = "Purifier"
+
+[node name="purifier3" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1638421448]
+layout_mode = 0
+offset_left = 709.0
+offset_top = 340.0
+offset_right = 923.0
+offset_bottom = 481.0
+text = "Purifier"
 
 [node name="CustomerManager" parent="." unique_id=1844312210 instance=ExtResource("2_cmgr")]
 
@@ -263,12 +311,18 @@ Purifier"
 [connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list" to="." method="_on_mixin_list_item_clicked"]
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/garnish_menu" to="." method="_on_garnish_menu_pressed"]
 [connection signal="item_clicked" from="LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list" to="." method="_on_garnish_list_item_clicked"]
+[connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/mixer" to="." method="_on_mixer_pressed"]
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/bar_mat" to="." method="_on_bar_mat_pressed"]
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1" to="." method="_on_bar_mat_drink_1_pressed"]
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2" to="." method="_on_bar_mat_drink_2_pressed"]
+[connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/shaker" to="." method="_on_shaker_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/trash" to="." method="_on_trash_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/ice" to="." method="_on_ice_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/consumables" to="." method="_on_consumables_pressed"]
 [connection signal="item_clicked" from="ToolkitScreen/CounterLayer/Counter/consumables/consumables_list" to="." method="_on_consumables_list_item_clicked"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/glasses_menu" to="." method="_on_glasses_menu_pressed"]
 [connection signal="item_clicked" from="ToolkitScreen/CounterLayer/Counter/glasses_menu/glasses_list" to="." method="_on_glasses_list_item_clicked"]
+[connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/purifier1" to="." method="_on_purifier_pressed"]
+[connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/purifier1" to="." method="_on_purifier_1_pressed"]
+[connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/purifier2" to="." method="_on_purifier_2_pressed"]
+[connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/purifier3" to="." method="_on_purifier_3_pressed"]
