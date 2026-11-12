@@ -17,12 +17,35 @@
 [ext_resource type="Texture2D" uid="uid://cisfje1wwy1ta" path="res://sprites/Garnish_Sprites/REUPLOADED_CHERRY_Wrk.png" id="12_53nt1"]
 [ext_resource type="Texture2D" uid="uid://bxjb58bugvad1" path="res://sprites/Menu_Icon_Sprites/REUPLOADED_GARNISHES_MENU_Wrk.png" id="13_kd8aa"]
 [ext_resource type="Texture2D" uid="uid://b0xwhjuh1lanq" path="res://sprites/Garnish_Sprites/REUPLOADED_MINT_Wrk.png" id="13_ndwor"]
+[ext_resource type="Texture2D" uid="uid://dsgnanr22uu1e" path="res://sprites/Menu_Icon_Sprites/REUPLOADED_MIXER.png" id="17_fteab"]
+[ext_resource type="Texture2D" uid="uid://d03m538nq4so6" path="res://sprites/Menu_Icon_Sprites/REUPLOADED_GLASS_MENU_CLOOOOSED.png" id="17_kd8aa"]
+[ext_resource type="Texture2D" uid="uid://d21xcr7fu5anf" path="res://sprites/Menu_Icon_Sprites/REUPLOADED_SHAKER_ONBAR.png" id="18_wvxlp"]
+[ext_resource type="Texture2D" uid="uid://cwx0sgcjrroiw" path="res://sprites/Menu_Icon_Sprites/REUPLOADED_PURIFIER.png" id="20_uyv1q"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3gxfx"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kd8aa"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wvxlp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qyivk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eia43"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5aqrf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1txpi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hx6i0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fteab"]
+content_margin_left = 37.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uyv1q"]
+content_margin_left = 37.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x3hby"]
+content_margin_left = 37.0
 
 [node name="Bar" type="Node2D" unique_id=1433516175]
 script = ExtResource("1_wj5ec")
@@ -158,11 +181,13 @@ item_5/text = "Orange Slice"
 
 [node name="mixer" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=676957543]
 layout_mode = 0
-offset_left = 171.0
-offset_top = 379.0
-offset_right = 331.0
-offset_bottom = 478.0
-text = "Mixer"
+offset_left = 184.0
+offset_top = 365.0
+offset_right = 247.0
+offset_bottom = 485.0
+scale = Vector2(1.5, 1.5)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qyivk")
+icon = ExtResource("17_fteab")
 
 [node name="bar_mat" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=542270664]
 layout_mode = 0
@@ -192,9 +217,17 @@ offset_left = 4.0
 offset_top = 379.0
 offset_right = 170.0
 offset_bottom = 478.0
-text = "Shaker
-"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_eia43")
+icon = ExtResource("18_wvxlp")
 icon_alignment = 1
+
+[node name="exit_menu" type="Button" parent="LibraryScreen/CounterLayer/Counter" unique_id=841744291]
+layout_mode = 0
+offset_left = 807.0
+offset_top = 239.0
+offset_right = 897.0
+offset_bottom = 338.0
+text = "Exit"
 
 [node name="ToolkitScreen" type="Node2D" parent="." unique_id=420253463]
 position = Vector2(1152, 0)
@@ -267,7 +300,10 @@ offset_left = 926.0
 offset_top = 58.0
 offset_right = 1139.0
 offset_bottom = 482.0
-text = "Glasses"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5aqrf")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1txpi")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_hx6i0")
+icon = ExtResource("17_kd8aa")
 
 [node name="glasses_list" type="ItemList" parent="ToolkitScreen/CounterLayer/Counter/glasses_menu" unique_id=1987495431]
 layout_mode = 0
@@ -286,7 +322,8 @@ offset_left = 709.0
 offset_top = 58.0
 offset_right = 923.0
 offset_bottom = 199.0
-text = "Purifier"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fteab")
+icon = ExtResource("20_uyv1q")
 
 [node name="purifier2" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=642529468]
 layout_mode = 0
@@ -294,7 +331,8 @@ offset_left = 709.0
 offset_top = 199.0
 offset_right = 923.0
 offset_bottom = 340.0
-text = "Purifier"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_uyv1q")
+icon = ExtResource("20_uyv1q")
 
 [node name="purifier3" type="Button" parent="ToolkitScreen/CounterLayer/Counter" unique_id=1638421448]
 layout_mode = 0
@@ -302,7 +340,8 @@ offset_left = 709.0
 offset_top = 340.0
 offset_right = 923.0
 offset_bottom = 481.0
-text = "Purifier"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x3hby")
+icon = ExtResource("20_uyv1q")
 
 [node name="CustomerManager" parent="." unique_id=1844312210 instance=ExtResource("2_cmgr")]
 
@@ -317,6 +356,7 @@ text = "Purifier"
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1" to="." method="_on_bar_mat_drink_1_pressed"]
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2" to="." method="_on_bar_mat_drink_2_pressed"]
 [connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/shaker" to="." method="_on_shaker_pressed"]
+[connection signal="pressed" from="LibraryScreen/CounterLayer/Counter/exit_menu" to="." method="_on_exit_menu_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/trash" to="." method="_on_trash_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/ice" to="." method="_on_ice_pressed"]
 [connection signal="pressed" from="ToolkitScreen/CounterLayer/Counter/consumables" to="." method="_on_consumables_pressed"]
