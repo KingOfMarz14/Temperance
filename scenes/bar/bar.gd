@@ -58,6 +58,7 @@ func _ready():
 	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink1.hide()
 	$LibraryScreen/CounterLayer/Counter/bar_mat/bar_mat_drink2.hide()
 	$ToolkitScreen/CounterLayer/Counter/consumables/consumables_list.hide()
+	$LibraryScreen/CounterLayer/Counter/exit_menu.hide()
 
 	# only show stuff the player owns
 	_setup_menu($LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list, GameState.ALL_SPIRITS, GameState.owned_spirits)
@@ -87,6 +88,7 @@ func _add_close_button(list: Control, show_again: Array):
 	list.add_child(x)
 	x.pressed.connect(func():
 		list.hide()
+		$LibraryScreen/CounterLayer/Counter/exit_menu.hide()
 		for menu in show_again:
 			menu.show())
 
@@ -167,18 +169,21 @@ func _apply_look(animate: bool, duration: float = LOOK_TIME):
 
 func _on_spirit_menu_pressed() -> void:
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.show()
+	$LibraryScreen/CounterLayer/Counter/exit_menu.show()
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu".hide()
 	$LibraryScreen/CounterLayer/Counter/garnish_menu.hide()
 	
 
 func _on_mixin_menu_pressed() -> void:
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".show()
+	$LibraryScreen/CounterLayer/Counter/exit_menu.show()
 	$LibraryScreen/CounterLayer/Counter/spirit_menu.hide()
 	$LibraryScreen/CounterLayer/Counter/garnish_menu.hide()
 
 
 func _on_garnish_menu_pressed() -> void:
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.show()
+	$LibraryScreen/CounterLayer/Counter/exit_menu.show()
 	$LibraryScreen/CounterLayer/Counter/spirit_menu.hide()
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu".hide()
 
@@ -190,6 +195,7 @@ func _on_spirits_list_item_clicked(index: int, at_position: Vector2, mouse_butto
 		$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
 		$"LibraryScreen/CounterLayer/Counter/mix-in_menu".show()
 		$LibraryScreen/CounterLayer/Counter/garnish_menu.show()
+		$LibraryScreen/CounterLayer/Counter/exit_menu.hide()
 		return
 
 	if (current._spirit[0] == null):
@@ -200,6 +206,7 @@ func _on_spirits_list_item_clicked(index: int, at_position: Vector2, mouse_butto
 	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu".show()
 	$LibraryScreen/CounterLayer/Counter/garnish_menu.show()
+	$LibraryScreen/CounterLayer/Counter/exit_menu.hide()
 	
 
 
@@ -208,6 +215,7 @@ func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_
 		$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 		$LibraryScreen/CounterLayer/Counter/spirit_menu.show()
 		$LibraryScreen/CounterLayer/Counter/garnish_menu.show()
+		$LibraryScreen/CounterLayer/Counter/exit_menu.hide()
 		return
 
 	var basic_quality = [0, 1, 2, 9, 10, 11, 12]
@@ -249,6 +257,7 @@ func _on_mixin_list_item_clicked(index: int, at_position: Vector2, mouse_button_
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
 	$LibraryScreen/CounterLayer/Counter/spirit_menu.show()
 	$LibraryScreen/CounterLayer/Counter/garnish_menu.show()
+	$LibraryScreen/CounterLayer/Counter/exit_menu.hide()
 
 
 func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
@@ -256,6 +265,7 @@ func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_butto
 		$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
 		$LibraryScreen/CounterLayer/Counter/spirit_menu.show()
 		$"LibraryScreen/CounterLayer/Counter/mix-in_menu".show()
+		$LibraryScreen/CounterLayer/Counter/exit_menu.hide()
 		return
 	
 	if (current._garnish[0] == null):
@@ -266,6 +276,7 @@ func _on_garnish_list_item_clicked(index: int, at_position: Vector2, mouse_butto
 	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
 	$LibraryScreen/CounterLayer/Counter/spirit_menu.show()
 	$"LibraryScreen/CounterLayer/Counter/mix-in_menu".show()
+	$LibraryScreen/CounterLayer/Counter/exit_menu.hide()
 
 
 func _on_glasses_list_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
@@ -505,3 +516,13 @@ func _on_mixer_pressed() -> void:
 		current._stirred = true
 	else:
 		$CustomerManager._flash_message("Nothing to stir right now")
+
+
+func _on_exit_menu_pressed() -> void:
+	$LibraryScreen/CounterLayer/Counter/spirit_menu/spirits_list.hide()
+	$"LibraryScreen/CounterLayer/Counter/mix-in_menu/mix-in_list".hide()
+	$LibraryScreen/CounterLayer/Counter/garnish_menu/garnish_list.hide()
+	$LibraryScreen/CounterLayer/Counter/exit_menu.hide()
+	$LibraryScreen/CounterLayer/Counter/spirit_menu.show()
+	$"LibraryScreen/CounterLayer/Counter/mix-in_menu".show()
+	$LibraryScreen/CounterLayer/Counter/garnish_menu.show()

@@ -17,6 +17,7 @@ const LIBRARY = "LibraryScreen/CounterLayer/Counter/"
 var row: HBoxContainer
 var last_look := ""
 var purify_start = [0, 0, 0]
+var purifier_art = []   # the purifier pics/text so they come back when empty
 
 
 func _ready():
@@ -38,6 +39,10 @@ func _ready():
 	row.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	holder.add_child(row)
 	row.hide()
+
+	for i in 3:
+		var button: Button = bar.get_node("ToolkitScreen/CounterLayer/Counter/purifier%d" % (i + 1))
+		purifier_art.append([button.icon, button.text])
 
 
 func _process(_delta):
@@ -146,8 +151,8 @@ func _update_purifiers():
 		var finished = bar.get("finished_p%d" % (i + 1))
 
 		if d == null:
-			button.text = "Purifier"
-			button.icon = null
+			button.icon = purifier_art[i][0]
+			button.text = purifier_art[i][1]
 			purify_start[i] = 0
 			continue
 
