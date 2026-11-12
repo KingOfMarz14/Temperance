@@ -4,10 +4,11 @@
 [ext_resource type="Script" uid="uid://bnsuj8p0xg253" path="res://scenes/customers/customer_type.gd" id="2_4n0dr"]
 [ext_resource type="Resource" path="res://scenes/customers/mothman.tres" id="2_moth"]
 [ext_resource type="Resource" path="res://scenes/customers/arachnia.tres" id="3_arach"]
+[ext_resource type="Resource" path="res://scenes/customers/teruko.tres" id="4_teru"]
 
 [node name="CustomerManager" type="Node" unique_id=89587130]
 script = ExtResource("1_mgr")
-customer_types = Array[ExtResource("2_4n0dr")]([ExtResource("2_moth"), ExtResource("3_arach")])
+customer_types = Array[ExtResource("2_4n0dr")]([ExtResource("2_moth"), ExtResource("3_arach"), ExtResource("4_teru")])
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1083694608]
 

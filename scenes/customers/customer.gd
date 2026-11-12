@@ -10,7 +10,9 @@ enum State { WALKING_IN, WAITING, TALKING, ORDERED, LEAVING }
 const TALK_TIME = 2.0            # talking anim
 const TALK_FRAME_TIME = 0.25     # b/w frames of talking
 const EXIT_X = -400.0            # how far out left
-const BUBBLE_GAP = 20.0          # b/w head and bubble
+const BUBBLE_GAP = 20.0
+const HOP_HEIGHT = 12.0          # how high they bounce while walking
+const HOP_SPEED = 9.0            # bounces per sec-ish          # b/w head and bubble
 
 @export var show_order_only_on_hover := false
 
@@ -20,6 +22,8 @@ var state = State.WALKING_IN
 var hovered := false
 var top_y := 0.0              # top of the sprite (the customer's origin is the counter line)
 var current_patience := 0.0
+var walking := false
+var hop_time := 0.0
 var preset_order: Drink = null   # the manager hands each customer their order ahead of time
 var wait_left := 0.0             # bars left on the waiting meter when you took the order    # whichever timer is running rn (waiting or drink)
 
@@ -77,9 +81,19 @@ func _ready():
 	patience_timer.timeout.connect(_on_patience_ran_out)
 
 
-func _process(_delta):
+func _process(delta):
 	if state == State.WAITING or state == State.ORDERED:
 		_update_patience_bar()
+	_hop(delta)
+
+
+# bob up and down while walking, land back down when they stop
+func _hop(delta):
+	if walking:
+		hop_time += delta
+		sprite.position.y = -abs(sin(hop_time * HOP_SPEED)) * HOP_HEIGHT
+	elif sprite.position.y != 0:
+		sprite.position.y = move_toward(sprite.position.y, 0, HOP_HEIGHT * delta * 8)
 
 
 # arriving
@@ -87,9 +101,11 @@ func _process(_delta):
 # from off screen -> leftmost
 func walk_in(start_global_position: Vector2):
 	global_position = start_global_position
+	walking = true
 	var tween = create_tween()
 	tween.tween_property(self, "position", Vector2.ZERO, position.length() / type.walk_speed)
 	await tween.finished
+	walking = false
 	if state != State.WALKING_IN:
 		return
 	state = State.WAITING
@@ -198,6 +214,7 @@ func leave():
 
 	await get_tree().create_timer(1.2).timeout # this gives it a moment to see reaction if theyre happy or sad
 	var target = get_parent().to_local(Vector2(EXIT_X, global_position.y))
+	walking = true
 	var tween = create_tween()
 	tween.tween_property(self, "position", target, position.distance_to(target) / type.walk_speed)
 	await tween.finished

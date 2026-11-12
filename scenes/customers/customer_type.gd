@@ -11,7 +11,7 @@ extends Resource
 @export var talk_frames: Array[Texture2D] = []
 
 ## seconds they wait for you to take their order
-@export var wait_patience: float = 45.0
+@export var wait_patience: float = 60.0
 
 ## seconds they wait for their drink after ordering
 ## this is set high for testing; CHANGE SOON

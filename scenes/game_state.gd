@@ -1,11 +1,11 @@
 extends Node
 
 # tweakable
-const SPIRIT_PRICE = 0.50
-const MIXIN_PRICE = 0.15
-const GARNISH_PRICE = 0.10
-const CORRECT_ITEM_TIP = 0.02      # per correct part of the order
-const SPEED_TIP = 0.05             # per patience increment left
+const SPIRIT_PRICE = 0.75
+const MIXIN_PRICE = 0.25
+const GARNISH_PRICE = 0.15
+const CORRECT_ITEM_TIP = 0.03      # per correct part of the order
+const SPEED_TIP = 0.08             # per patience increment left
 const PATIENCE_INCREMENTS = 5
 const FIRST_DAY_CUSTOMERS = 5
 const EXTRA_CUSTOMERS_PER_DAY = 1
@@ -13,7 +13,7 @@ const MAX_CUSTOMERS = 100
 const UNOWNED_CHANCE_PER_DAY = 0.02   # doc: X = days * 2%
 # quota = what you'd make serving every order right with about 3 bars left,
 # times this. lower = easier, 1.0 = basically perfect
-const QUOTA_FRACTION = 0.95
+const QUOTA_FRACTION = 0.76
 const QUOTA_SPEED = 3.0
 
 # limits
@@ -30,13 +30,18 @@ const ALL_MIXINS = ["Lemon Juice", "Honey", "Grenadine", "Maraschino Liquer",
 const ALL_GARNISHES = ["Lemon Twist", "Orange Twist", "Cherries", "Mint",
 	"Lemon Slice", "Orange Slice"]
 
+# shop prices (placeholder, CHANGE SOON)
+const SHOP_SPIRIT_PRICE = 2.00
+const SHOP_MIXIN_PRICE = 1.00
+const SHOP_GARNISH_PRICE = 0.75
+
 # starter items
 const STARTER_SPIRITS = ["Gin", "Whiskey", "Rum"]
 const STARTER_MIXINS = ["Lemon Juice", "Honey", "Grenadine"]
 const STARTER_GARNISHES = ["Cherries", "Lemon Twist", "Mint"]
 
 var day := 1
-var money := 0.0
+var money := 0.0   # profit only (whats left after quotas)
 var owned_spirits: Array = []
 var owned_mixins: Array = []
 var owned_garnishes: Array = []
@@ -53,6 +58,31 @@ func reset():
 	owned_spirits = STARTER_SPIRITS.duplicate()
 	owned_mixins = STARTER_MIXINS.duplicate()
 	owned_garnishes = STARTER_GARNISHES.duplicate()
+
+
+# shop
+
+# stuff you dont own yet, as [name, category, price]
+func shop_items() -> Array:
+	var items = []
+	for s in ALL_SPIRITS:
+		if not owned_spirits.has(s): items.append([s, "spirit", SHOP_SPIRIT_PRICE])
+	for m in ALL_MIXINS:
+		if not owned_mixins.has(m): items.append([m, "mixin", SHOP_MIXIN_PRICE])
+	for g in ALL_GARNISHES:
+		if not owned_garnishes.has(g): items.append([g, "garnish", SHOP_GARNISH_PRICE])
+	return items
+
+
+func buy(item: String, category: String, price: float) -> bool:
+	if money < price:
+		return false
+	money = snapped(money - price, 0.01)
+	match category:
+		"spirit": owned_spirits.append(item)
+		"mixin": owned_mixins.append(item)
+		"garnish": owned_garnishes.append(item)
+	return true
 
 
 func customers_for_day() -> int:

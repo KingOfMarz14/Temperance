@@ -121,6 +121,8 @@ func _on_customer_clicked(customer):
 		customer.State.ORDERED:
 			if bar.current == null:
 				_flash_message("Make a drink first! (Look down with S, start with a glass)")
+			elif not bar.current.purify:
+				_flash_message("Purify the drink first!")
 			else:
 				_serve(customer)
 
@@ -145,7 +147,6 @@ func _serve(customer):
 		
 	if (bar.multiplier > 1):
 		bar.multiplier = 1
-	GameState.money += result.total
 	day_earnings += result.total
 
 	customer.receive_drink(result)
@@ -159,7 +160,7 @@ func _serve(customer):
 
 func _update_hud():
 	hud_label.text = "Day %d    Today: $%.2f / $%.2f" % [GameState.day, day_earnings, day_quota]
-	# all the money from every day so far (resets on a new run)
+	# profit saved from past days (resets on a new run)
 	wallet_label.text = "Wallet: $%.2f" % GameState.money
 
 
@@ -174,12 +175,15 @@ func _flash_message(text: String):
 func _end_day():
 	day_over = true
 	var quota = day_quota
-	shop_button.visible = day_earnings >= quota   # no shop if you closed down
+	shop_button.hide()   # next day goes to the shop now
 	if day_earnings >= quota:
-		day_over_label.text = "Day %d complete!\nYou made $%.2f (quota $%.2f)" % [GameState.day, day_earnings, quota]
+		# quota gets paid off, only the extra goes in the wallet
+		var profit = snapped(day_earnings - quota, 0.01)
+		GameState.money += profit
+		_update_hud()
+		day_over_label.text = "Day %d complete!\nYou made $%.2f (quota $%.2f)\nProfit: $%.2f" % [GameState.day, day_earnings, quota, profit]
 		day_over_button.text = "Next day"
 	else:
-		$HUD/DayOver/Panel/VBox/Shop.hide()
 		day_over_label.text = "Closed down...\nYou made $%.2f but needed $%.2f" % [day_earnings, quota]
 		day_over_button.text = "Back to main menu"
 	day_over_panel.visible = true
@@ -187,8 +191,7 @@ func _end_day():
 
 func _on_continue_pressed():
 	if day_earnings >= day_quota:
-		GameState.day += 1
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_file("res://scenes/shop/shop.tscn")
 	else:
 		GameState.reset()
 		get_tree().change_scene_to_file("res://scenes/main_menu/main_menu.tscn")
