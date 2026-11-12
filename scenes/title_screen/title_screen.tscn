@@ -18,5 +18,5 @@ offset_bottom = 646.0
 action_mode = 0
 text = "Title Screen, takes to main menu :D"
 
-[connection signal="pressed" from="Button Manager/title screen" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Button Manager/title screen" to="." method="_on_title_screen_pressed"]
+[connection signal="pressed" from="Button Manager/title screen" to="." method="_on_start_button_pressed"]
