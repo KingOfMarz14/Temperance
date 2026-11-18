@@ -504,7 +504,7 @@ func _on_shaker_pressed() -> void:
 	if no_glass():
 		return
 	if current.mix[0] != null && current.spirit[0] != null:
-		current._shaken = true
+		_start_minigame(false)
 	else:
 		$CustomerManager._flash_message("Nothing to shake right now")
 
@@ -513,9 +513,20 @@ func _on_mixer_pressed() -> void:
 	if no_glass():
 		return
 	if current.spirit[0] != null:   # stirred orders can be spirit only
-		current._stirred = true
+		_start_minigame(true)
 	else:
 		$CustomerManager._flash_message("Nothing to stir right now")
+
+
+# shake/stir minigame, only marks the drink once its finished
+func _start_minigame(stirring: bool):
+	var drink = current
+	var game = preload("res://scenes/bar/mix_minigame.gd").new(stirring)
+	game.done.connect(func():
+		drink._stirred = stirring
+		drink._shaken = not stirring
+		$CustomerManager._flash_message("Stirred!" if stirring else "Shaken!"))
+	add_child(game)
 
 
 func _on_exit_menu_pressed() -> void:
